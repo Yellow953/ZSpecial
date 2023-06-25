@@ -1,0 +1,4 @@
+bright green: #2bcc91 
+
+logo green #2F6665
+logo gold #AD9249
