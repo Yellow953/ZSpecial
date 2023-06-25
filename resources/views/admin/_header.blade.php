@@ -9,7 +9,7 @@
                 <span></span>
             </div>
 
-            <form action="/dollar_rate/usage" method="post">
+            <form action="/dollar_rate/usage" method="post" class="d-none d-md-flex">
                 @csrf
                 <div class="input-group input-group-outline">
                     <div class="d-flex mx-4">
@@ -37,8 +37,8 @@
         <div class="col-6 clearfix p-0">
             <div class="user-profile pull-right m-0 border">
                 <img class="avatar user-thumb" src="{{asset('assets/images/default_profile.png')}}" alt="avatar">
-                <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ ucwords(Auth::user()->name) }}<i
-                        class="fa fa-angle-down"></i></h4>
+                <h4 class="user-name dropdown-toggle text-dark" data-toggle="dropdown">{{ ucwords(Auth::user()->name)
+                    }}<i class="fa fa-angle-down"></i></h4>
                 <div class="dropdown-menu">
                     <a href="/user/edit" class="dropdown-item">{{ ucfirst(Auth::user()->name) }}
                         ({{ucfirst(Auth::user()->role)}})</a>

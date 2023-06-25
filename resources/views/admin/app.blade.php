@@ -40,7 +40,22 @@
 
 <body>
     <div id="app">
-        @yield('content')
+        <!-- page container area start -->
+        <div class="page-container">
+            @include('admin._navbar')
+
+            <!-- main content area start -->
+            <div class="main-content">
+                @include('admin._header')
+
+                @yield('content')
+            </div>
+            <!-- main content area end -->
+
+            @include('admin._footer')
+        </div>
+        <!-- page container area end -->
+
     </div>
 
     <!-- jquery latest version -->
