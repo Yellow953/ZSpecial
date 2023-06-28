@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/user/edit', [App\Http\Controllers\UserController::class, 'edit']);
 Route::post('/user/update', [App\Http\Controllers\UserController::class, 'update']);
@@ -13,14 +14,14 @@ Route::get('/users', [App\Http\Controllers\UserController::class, 'index']);
 Route::get('/password/edit', [App\Http\Controllers\UserController::class, 'EditPassword']);
 Route::post('/password/update', [App\Http\Controllers\UserController::class, 'UpdatePassword']);
 
+
+// Admin CRM
+Route::get('/app', [App\Http\Controllers\AdminController::class, 'index']);
+
 // Dollar Rates
 Route::get('/dollar_rate/edit', [App\Http\Controllers\DollarRateController::class, 'edit']);
 Route::post('/dollar_rate/update', [App\Http\Controllers\DollarRateController::class, 'update']);
 Route::post('/dollar_rate/usage', [App\Http\Controllers\DollarRateController::class, 'usage']);
-
-
-// Admin CRM
-Route::get('/app', [App\Http\Controllers\AdminController::class, 'index']);
 
 // Backups
 Route::get('/backup', [App\Http\Controllers\BackupController::class, 'index']);
@@ -60,6 +61,23 @@ Route::get('/product/{id}/edit', [App\Http\Controllers\ProductController::class,
 Route::post('/product/{id}/update', [App\Http\Controllers\ProductController::class, 'update']);
 Route::get('/product/{id}/destroy', [App\Http\Controllers\ProductController::class, 'destroy']);
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'index']);
+
+// Clients
+Route::get('/client/new', [App\Http\Controllers\ClientController::class, 'new']);
+Route::post('/client/create', [App\Http\Controllers\ClientController::class, 'create']);
+Route::get('/client/{id}/edit', [App\Http\Controllers\ClientController::class, 'edit']);
+Route::post('/client/{id}/update', [App\Http\Controllers\ClientController::class, 'update']);
+Route::get('/client/{id}/destroy', [App\Http\Controllers\ClientController::class, 'destroy']);
+Route::get('/clients', [App\Http\Controllers\ClientController::class, 'index']);
+
+// Orders
+Route::get('/order/{id}/edit', [App\Http\Controllers\OrderController::class, 'edit']);
+Route::post('/order/{id}/update', [App\Http\Controllers\OrderController::class, 'update']);
+Route::get('/order/{id}/delete', [App\Http\Controllers\OrderController::class, 'destroy']);
+Route::get('/order/{id}/show', [App\Http\Controllers\OrderController::class, 'show']);
+Route::get('/order/new', [App\Http\Controllers\OrderController::class, 'new']);
+Route::post('/order/create', [App\Http\Controllers\OrderController::class, 'create']);
+Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index']);
 
 // Social Media
 Route::get('/social_media', [App\Http\Controllers\SocialMediaController::class, 'index']);

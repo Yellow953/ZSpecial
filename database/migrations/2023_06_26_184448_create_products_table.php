@@ -9,7 +9,18 @@ return new class extends Migration {
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string("name")->unique();
+            $table->double('quantity')->default(0);
+            $table->double('buy_price')->unsigned()->default(0);
+            $table->double('sell_price')->unsigned()->default(0);
+            $table->string('description')->nullable();
+            $table->string('barcode')->unique();
+            $table->string('image');
+            $table->date('expiry_date')->nullable();
+            $table->bigInteger("category_id")->unsigned();
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

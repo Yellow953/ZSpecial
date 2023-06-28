@@ -1,0 +1,158 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Category;
+use App\Models\Log;
+use App\Models\Order;
+use App\Models\Product;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+
+class OrderController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
+    public function index()
+    {
+        $orders = Order::all();
+        return view('orders.index', compact('orders'));
+    }
+
+    public function new()
+    {
+        $categories = Category::with('products')->get();
+        $orders = auth()->user()->orders()->with('products')->paginate(5);
+        $data = compact('categories', 'orders');
+        return view('orders.new', $data);
+
+    } //end of new
+
+    public function create(Request $request)
+    {
+        $request->validate([
+            'products' => 'required|array',
+        ]);
+
+        foreach ($request->products as $id => $quantity) {
+            $product = Product::FindOrFail($id);
+            if (($product->quantity - $quantity['quantity']) < 0) {
+                return redirect()->back()->with('danger', 'Product not available...');
+            }
+        }
+        $this->attach_order($request);
+
+        session()->flash('success', "order created successfully");
+        return redirect('/orders');
+
+    } //end of create
+
+    public function edit($id)
+    {
+        $order = Order::find($id);
+        $categories = Category::with('products')->get();
+        $orders = auth()->user()->orders()->with('products');
+        $data = compact('categories', 'orders', 'order');
+        return view('orders.edit', $data);
+
+    } //end of edit
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'products' => 'required|array',
+        ]);
+
+        $order = Order::find($id);
+
+        $this->detach_order($order);
+
+        foreach ($request->products as $id => $quantity) {
+            $product = Product::FindOrFail($id);
+            if (($product->quantity - $quantity['quantity']) < 0) {
+                return redirect()->back()->with('danger', 'Product not available...');
+            }
+        }
+        $this->attach_order($request);
+
+        session()->flash('success', "order updated successfully");
+        return redirect('/orders');
+
+    } //end of update
+
+    private function attach_order($request)
+    {
+        $order = auth()->user()->orders()->create([]);
+
+        $order->products()->attach($request->products);
+
+        $text = "Order " . $order->id . " : ";
+        $total_price = 0;
+
+        foreach ($request->products as $id => $quantity) {
+            if ($quantity['quantity'] <= 0) {
+                return redirect()->back()->with('danger', 'Negative Values...');
+            }
+
+            $product = Product::FindOrFail($id);
+            $text .= $product->name . " : " . $quantity['quantity'] . " , ";
+            $total_price += $product->sell_price * $quantity['quantity'];
+
+            $product->update([
+                'quantity' => $product->quantity - $quantity['quantity']
+            ]);
+
+        } //end of foreach
+
+        $order->update([
+            'total_price' => $total_price
+        ]);
+        $text .= " total price : " . $total_price;
+
+        $text .= ", in " . Carbon::now();
+        Log::create(['text' => $text]);
+    } //end of attach order
+
+    private function detach_order($order)
+    {
+        foreach ($order->products as $product) {
+
+            $product->update([
+                'quantity' => $product->quantity + $product->pivot->quantity
+            ]);
+
+        } //end of for each
+
+        $order->delete();
+
+    } //end of detach order
+
+    public function show($id)
+    {
+        $order = Order::find($id);
+        return view('orders.show', compact('order'));
+    }
+
+    public function destroy($id)
+    {
+        $order = Order::find($id);
+        foreach ($order->products as $product) {
+
+            $product->update([
+                'quantity' => $product->quantity + $product->pivot->quantity
+            ]);
+
+        } //end of for each
+
+        $text = $order->user->name . " deleted order " . $order->id . " in " . Carbon::now();
+        Log::create(['text' => $text]);
+
+        $order->delete();
+        session()->flash('success', "Order successfully deleted and returned all items!");
+        return redirect('/orders');
+
+    } //end of order
+}
