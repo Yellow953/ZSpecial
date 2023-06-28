@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Log;
 use Carbon\Carbon;
 
-class LogsController extends Controller
+class LogController extends Controller
 {
     public function __construct()
     {

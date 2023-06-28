@@ -1,11 +1,14 @@
 <!-- sidebar menu area start -->
 <div class="sidebar-menu">
-    <div class="sidebar-header">
+    <div class="sidebar-header py-1">
         <div class="logo">
-            <a href="/"><img src="{{asset('admin/images/icon/logo.png')}}" alt="logo"></a>
+            <a href="/app" class="d-flex">
+                <h2 class="my-auto text-dark">ZSpecial</h2>
+                <img src="{{asset('assets/images/logo.png')}}" alt="logo" class="my-auto logo-app mx-4">
+            </a>
         </div>
     </div>
-    <div class="main-menu">
+    <div class="main-menu p-0">
         <div class="menu-inner">
             <nav>
                 <ul class="metismenu" id="menu">

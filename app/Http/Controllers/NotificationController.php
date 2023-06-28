@@ -29,6 +29,6 @@ class NotificationController extends Controller
 
         $search = request()->query('search');
 
-        return view('notifications.index', compact('notifications', 'dollar_rate'));
+        return view('notifications.index', compact('notifications'));
     }
 }
