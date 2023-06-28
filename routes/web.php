@@ -30,14 +30,14 @@ Route::get('/backup/export/categories', [App\Http\Controllers\BackupController::
 Route::get('/backup/export/products', [App\Http\Controllers\BackupController::class, 'ExportProducts']);
 Route::get('/backup/export/users', [App\Http\Controllers\BackupController::class, 'ExportUsers']);
 Route::get('/backup/export/logs', [App\Http\Controllers\BackupController::class, 'ExportLogs']);
-Route::get('/backup/export/reports', [App\Http\Controllers\BackupController::class, 'ExportReports']);
+Route::get('/backup/export/clients', [App\Http\Controllers\BackupController::class, 'ExportClients']);
 Route::get('/backup/export/orders', [App\Http\Controllers\BackupController::class, 'ExportOrders']);
 // Import
 Route::post('/backup/import/categories', [App\Http\Controllers\BackupController::class, 'ImportCategories']);
 Route::post('/backup/import/products', [App\Http\Controllers\BackupController::class, 'ImportProducts']);
 Route::post('/backup/import/users', [App\Http\Controllers\BackupController::class, 'ImportUsers']);
 Route::post('/backup/import/logs', [App\Http\Controllers\BackupController::class, 'ImportLogs']);
-Route::post('/backup/import/reports', [App\Http\Controllers\BackupController::class, 'ImportReports']);
+Route::post('/backup/import/clients', [App\Http\Controllers\BackupController::class, 'ImportClients']);
 Route::post('/backup/import/orders', [App\Http\Controllers\BackupController::class, 'ImportOrders']);
 
 // Logs

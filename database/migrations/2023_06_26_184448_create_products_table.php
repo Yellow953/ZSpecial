@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->double('buy_price')->unsigned()->default(0);
             $table->double('sell_price')->unsigned()->default(0);
             $table->string('description')->nullable();
-            $table->string('barcode')->unique();
-            $table->string('image');
+            $table->string('barcode')->nullable();
+            $table->string('image')->default('assets/images/no_img.png');
             $table->date('expiry_date')->nullable();
             $table->bigInteger("category_id")->unsigned();
             $table->timestamps();

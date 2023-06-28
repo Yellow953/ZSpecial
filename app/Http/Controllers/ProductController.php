@@ -63,13 +63,8 @@ class ProductController extends Controller
         $product->sell_price = $request->sell_price;
         $product->category_id = $request->category_id;
         $product->barcode = $request->barcode;
+        $product->description = $request->description;
 
-        if ($request->description) {
-            $product->description = $request->description;
-        }
-        if ($request->expiry_date) {
-            $product->expiry_date = $request->expiry_date;
-        }
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
@@ -106,12 +101,8 @@ class ProductController extends Controller
         $product->buy_price = $request->buy_price;
         $product->sell_price = $request->sell_price;
         $product->barcode = $request->barcode;
-        if ($request->description) {
-            $product->description = $request->description;
-        }
-        if ($request->expiry_date) {
-            $product->expiry_date = $request->expiry_date;
-        }
+        $product->description = $request->description;
+
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
