@@ -38,11 +38,11 @@
                                     <td>
                                         <div class="d-flex justify-content-center">
                                             <a href="/category/{{$category->id}}/edit"
-                                                class="btn btn-warning btn-rounded m-1">Edit</a>
+                                                class="btn btn-warning btn-rounded m-1 ">Edit</a>
                                             <form method="GET" action="/category/{{$category->id}}/delete">
                                                 @csrf
                                                 <button type="submit"
-                                                    class="btn btn-danger btn-rounded show_confirm m-1"
+                                                    class="btn btn-danger btn-rounded show_confirm m-1 text-dark"
                                                     data-toggle="tooltip" title='Delete'>Delete</button>
                                             </form>
                                         </div>
