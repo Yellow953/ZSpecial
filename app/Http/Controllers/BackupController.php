@@ -248,7 +248,7 @@ class BackupController extends Controller
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $log = new Log();
-        $log->text = Auth()->user()->name . " imported all users in " . Carbon::now()->toDateTimeString();
+        $log->text = Auth()->user()->name . " imported all users, datetime: " . now();
         $log->save();
         return redirect()->back()->with('success', 'Users imported successfully!');
     }
@@ -283,7 +283,7 @@ class BackupController extends Controller
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $log = new Log();
-        $log->text = Auth()->user()->name . " imported all clients in " . Carbon::now()->toDateTimeString();
+        $log->text = Auth()->user()->name . " imported all clients, datetime: " . now();
         $log->save();
         return redirect()->back()->with('success', 'Clients imported successfully!');
     }
@@ -316,7 +316,7 @@ class BackupController extends Controller
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $log = new Log();
-        $log->text = Auth()->user()->name . " imported all categories in " . Carbon::now()->toDateTimeString();
+        $log->text = Auth()->user()->name . " imported all categories, datetime: " . now();
         $log->save();
         return redirect()->back()->with('success', 'Categories imported successfully!');
     }
@@ -356,7 +356,7 @@ class BackupController extends Controller
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $log = new Log();
-        $log->text = Auth()->user()->name . " imported all products in " . Carbon::now()->toDateTimeString();
+        $log->text = Auth()->user()->name . " imported all products, datetime: " . now();
         $log->save();
         return redirect()->back()->with('success', 'Products imported successfully!');
     }
@@ -389,7 +389,7 @@ class BackupController extends Controller
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $log = new Log();
-        $log->text = Auth()->user()->name . " imported all orders in " . Carbon::now()->toDateTimeString();
+        $log->text = Auth()->user()->name . " imported all orders, datetime: " . now();
         $log->save();
         return redirect()->back()->with('success', 'Orders imported successfully!');
     }
@@ -420,7 +420,7 @@ class BackupController extends Controller
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $log = new Log();
-        $log->text = Auth()->user()->name . " imported all logs in " . Carbon::now()->toDateTimeString();
+        $log->text = Auth()->user()->name . " imported all logs in " . Carbon::now();
         $log->save();
         return redirect()->back()->with('success', 'Logs imported successfully!');
     }

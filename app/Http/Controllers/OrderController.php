@@ -6,7 +6,6 @@ use App\Models\Category;
 use App\Models\Log;
 use App\Models\Order;
 use App\Models\Product;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -25,7 +24,7 @@ class OrderController extends Controller
     public function new()
     {
         $categories = Category::with('products')->get();
-        $orders = auth()->user()->orders()->with('products')->paginate(5);
+        $orders = Order::paginate(5);
         $data = compact('categories', 'orders');
         return view('orders.new', $data);
 
@@ -54,7 +53,7 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
         $categories = Category::with('products')->get();
-        $orders = auth()->user()->orders()->with('products');
+        $orders = Order::paginate(5);
         $data = compact('categories', 'orders', 'order');
         return view('orders.edit', $data);
 
@@ -112,7 +111,7 @@ class OrderController extends Controller
         ]);
         $text .= " total price : " . $total_price;
 
-        $text .= ", in " . Carbon::now();
+        $text .= ", datetime: " . now();
         Log::create(['text' => $text]);
     } //end of attach order
 
@@ -147,7 +146,7 @@ class OrderController extends Controller
 
         } //end of for each
 
-        $text = $order->user->name . " deleted order " . $order->id . " in " . Carbon::now();
+        $text = $order->user->name . " deleted order " . $order->id . ", datetime: " . now();
         Log::create(['text' => $text]);
 
         $order->delete();

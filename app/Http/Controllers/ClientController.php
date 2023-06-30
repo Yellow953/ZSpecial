@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Log;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -40,7 +39,7 @@ class ClientController extends Controller
         $client->phone = $request->phone;
         $client->address = $request->address;
 
-        $text = "Client " . $request->name . " created in " . Carbon::now();
+        $text = "Client " . $request->name . " created, datetime: " . now();
         Log::create(['text' => $text]);
 
         $client->save();
@@ -62,7 +61,7 @@ class ClientController extends Controller
         $client->address = $request->address;
         $client->save();
 
-        $text = "Client " . $client->name . " updated in " . Carbon::now();
+        $text = "Client " . $client->name . " updated, datetime: " . now();
         Log::create(['text' => $text]);
         return redirect('/clients')->with('warning', 'Client updated successfully');
     }
@@ -70,7 +69,7 @@ class ClientController extends Controller
     public function destroy($id)
     {
         $client = Client::find($id);
-        $text = "Client " . $client->name . " was deleted in " . Carbon::now();
+        $text = "Client " . $client->name . " was deleted, datetime: " . now();
         $client->delete();
         Log::create(['text' => $text]);
         return redirect('/clients')->with('danger', "Client deleted successfully");

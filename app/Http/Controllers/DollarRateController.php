@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\DollarRate;
 use App\Models\Log;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DollarRateController extends Controller
@@ -34,7 +33,7 @@ class DollarRateController extends Controller
 
         $dollar_rate = DollarRate::first();
         $dollar_rate->lbp = $request->lbp;
-        $text = "Dollar Rate changed to " . $dollar_rate->lbp . " in " . Carbon::now();
+        $text = "Dollar Rate changed to " . $dollar_rate->lbp . ", datetime: " . now();
         $dollar_rate->save();
 
         Log::create(['text' => $text]);

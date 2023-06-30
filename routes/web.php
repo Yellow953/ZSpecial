@@ -7,7 +7,7 @@ Auth::routes(['register' => false]);
 
 Route::get('/user/edit', [App\Http\Controllers\UserController::class, 'edit']);
 Route::post('/user/update', [App\Http\Controllers\UserController::class, 'update']);
-Route::get('/user/{id}/delete', [App\Http\Controllers\UserController::class, 'destroy']);
+Route::get('/user/{id}/destroy', [App\Http\Controllers\UserController::class, 'destroy']);
 Route::get('/user/new', [App\Http\Controllers\UserController::class, 'new']);
 Route::post('/user/create', [App\Http\Controllers\UserController::class, 'create']);
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index']);
@@ -55,10 +55,13 @@ Route::get('/category/{id}/destroy', [App\Http\Controllers\CategoryController::c
 Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'index']);
 
 // Products
+Route::get('/product/search', [App\Http\Controllers\ProductController::class, 'search']);
 Route::get('/product/new', [App\Http\Controllers\ProductController::class, 'new']);
 Route::post('/product/create', [App\Http\Controllers\ProductController::class, 'create']);
 Route::get('/product/{id}/edit', [App\Http\Controllers\ProductController::class, 'edit']);
 Route::post('/product/{id}/update', [App\Http\Controllers\ProductController::class, 'update']);
+Route::get('/product/{id}/import', [App\Http\Controllers\ProductController::class, 'import']);
+Route::post('/product/{id}/save', [App\Http\Controllers\ProductController::class, 'save']);
 Route::get('/product/{id}/destroy', [App\Http\Controllers\ProductController::class, 'destroy']);
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'index']);
 
@@ -73,7 +76,7 @@ Route::get('/clients', [App\Http\Controllers\ClientController::class, 'index']);
 // Orders
 Route::get('/order/{id}/edit', [App\Http\Controllers\OrderController::class, 'edit']);
 Route::post('/order/{id}/update', [App\Http\Controllers\OrderController::class, 'update']);
-Route::get('/order/{id}/delete', [App\Http\Controllers\OrderController::class, 'destroy']);
+Route::get('/order/{id}/destroy', [App\Http\Controllers\OrderController::class, 'destroy']);
 Route::get('/order/{id}/show', [App\Http\Controllers\OrderController::class, 'show']);
 Route::get('/order/new', [App\Http\Controllers\OrderController::class, 'new']);
 Route::post('/order/create', [App\Http\Controllers\OrderController::class, 'create']);

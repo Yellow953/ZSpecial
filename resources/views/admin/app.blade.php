@@ -36,6 +36,12 @@
     {{-- Sweet Alert --}}
     <script src="{{asset('assets/js/sweetalert.min.js')}}"></script>
 
+    {{-- JQuery --}}
+    <script src="{{asset('admin/js/jquery.min.js')}}"></script>
+
+    {{-- Order --}}
+    <script src="{{asset('admin/js/order.js')}}"></script>
+
 </head>
 
 <body>
@@ -47,6 +53,8 @@
             <!-- main content area start -->
             <div class="main-content">
                 @include('admin._header')
+
+                @include('admin._flash')
 
                 @yield('content')
             </div>

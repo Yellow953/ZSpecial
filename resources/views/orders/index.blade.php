@@ -43,7 +43,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        @if ($dollar_rate->usage == true )
+                                        @if (Helper::dollar_rate()->usage == true )
                                         {{number_format(Helper::price_to_lbp($order->total_price))}} LBP
                                         @else
                                         {{number_format($order->total_price, 2)}} $
@@ -56,7 +56,7 @@
                                             @if (Auth::user()->role == "admin")
                                             <a href="/order/{{$order->id}}/edit"
                                                 class="btn btn-warning btn-rounded m-1">Edit</a>
-                                            <form method="GET" action="/order/{{$order->id}}/delete">
+                                            <form method="GET" action="/order/{{$order->id}}/destroy">
                                                 @csrf
                                                 <button type="submit"
                                                     class="btn btn-danger btn-rounded show_confirm m-1"

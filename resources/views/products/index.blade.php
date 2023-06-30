@@ -41,14 +41,14 @@
                                         {{number_format($product->quantity, 2)}}
                                     </td>
                                     <td>
-                                        @if ($dollar_rate->usage == true )
+                                        @if (Helper::dollar_rate()->usage == true )
                                         {{number_format(Helper::price_to_lbp($product->buy_price))}} LBP
                                         @else
                                         {{number_format($product->buy_price, 2)}} $
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($dollar_rate->usage == true )
+                                        @if (Helper::dollar_rate()->usage == true )
                                         {{number_format(Helper::price_to_lbp($product->sell_price))}} LBP
                                         @else
                                         {{number_format($product->sell_price, 2)}} $
@@ -69,7 +69,7 @@
                                                 class="btn btn-success btn-rounded m-1">Import</a>
                                             <a href="/product/{{$product->id}}/edit"
                                                 class="btn btn-warning btn-rounded m-1">Edit</a>
-                                            <form method="GET" action="/product/{{$product->id}}/delete">
+                                            <form method="GET" action="/product/{{$product->id}}/destroy">
                                                 @csrf
                                                 <button type="submit"
                                                     class="btn btn-danger btn-rounded show_confirm m-1"

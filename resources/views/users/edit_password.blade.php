@@ -6,7 +6,7 @@
         < back</h3>
 </a>
 
-<div class="card">
+<div class="card m-3">
     <div class="card-body">
         <h4 class="header-title">Change Password</h4>
         <form method="POST" action="/password/update" enctype="multipart/form-data">

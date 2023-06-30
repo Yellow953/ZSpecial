@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Log;
 use App\Models\Product;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -75,7 +74,7 @@ class ProductController extends Controller
             $product->image = "/assets/images/no_img.png";
         }
 
-        $text = "Product " . $request->name . " created in " . Carbon::now();
+        $text = "Product " . $request->name . " created, datetime: " . now();
         Log::create(['text' => $text]);
 
         $product->save();
@@ -113,7 +112,7 @@ class ProductController extends Controller
         if ($request->category_id) {
             $product->category_id = $request->category_id;
         }
-        $text = "Product " . $product->name . " updated in " . Carbon::now();
+        $text = "Product " . $product->name . " updated, datetime: " . now();
         $product->save();
         Log::create(['text' => $text]);
         return redirect('/products')->with('success', 'Product was successfully updated.');
@@ -122,7 +121,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-        $text = "Product " . $product->name . " deleted in " . Carbon::now();
+        $text = "Product " . $product->name . " deleted, datetime: " . now();
 
         if ($product->image != '/assets/images/no_img.png') {
             $path = public_path($product->image);
@@ -154,7 +153,7 @@ class ProductController extends Controller
 
         $product->quantity += $request->quantity;
 
-        $text = "Product " . $product->name . " import " . $request->quantity . "pcs created in " . Carbon::now();
+        $text = "Product " . $product->name . " import " . $request->quantity . "pcs created, datetime: " . now();
         Log::create(['text' => $text]);
 
         $product->save();

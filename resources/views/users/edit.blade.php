@@ -6,7 +6,7 @@
         < back</h3>
 </a>
 
-<div class="card">
+<div class="card m-3">
     <div class="card-body">
         <h4 class="header-title">Edit User</h4>
         <form method="POST" action="/user/update" enctype="multipart/form-data">

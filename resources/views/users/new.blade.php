@@ -6,7 +6,7 @@
         < back</h3>
 </a>
 
-<div class="card">
+<div class="card m-3">
     <div class="card-body">
         <h4 class="header-title">New User</h4>
         <form method="POST" action="/user/create" enctype="multipart/form-data">
@@ -35,16 +35,6 @@
                 <label for="password_confirmation" class="col-form-label">Password Confirmatison</label>
                 <input type="password" class="form-control input-rounded" name="password_confirmation"
                     placeholder="********" required>
-            </div>
-
-            <div class="form-group">
-                <label for="image" class="col-form-label">Image</label>
-                <input class="form-control input-rounded image" name="image" type="file">
-            </div>
-
-            <div class="form-group">
-                <img src="{{ asset('assets/images/profiles/default_profile.png') }}" style="width: 100px"
-                    class="img-thumbnail image-preview" alt="">
             </div>
 
             <div class="form-group">

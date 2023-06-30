@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Log;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -36,7 +35,7 @@ class CategoryController extends Controller
             $category->description = $request->description;
         }
 
-        $text = "Category " . $request->name . " created in " . Carbon::now();
+        $text = "Category " . $request->name . " created, datetime: " . now();
 
         $category->save();
         Log::create(['text' => $text]);
@@ -57,7 +56,7 @@ class CategoryController extends Controller
             $category->description = $request->description;
         }
 
-        $text = "Category " . $category->name . " updated in " . Carbon::now();
+        $text = "Category " . $category->name . " updated, datetime: " . now();
 
         $category->save();
         Log::create(['text' => $text]);
@@ -67,7 +66,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
-        $text = "Category " . $category->name . " deleted in " . Carbon::now();
+        $text = "Category " . $category->name . " deleted, datetime: " . now();
 
         $category->delete();
         Log::create(['text' => $text]);

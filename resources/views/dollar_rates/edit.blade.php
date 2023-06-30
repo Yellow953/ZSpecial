@@ -1,12 +1,12 @@
-@extends('layouts.app')
+@extends('admin.app')
 
 @section('content')
-<a href="/" class="btn text-secondary">
+<a href="/app" class="btn text-secondary">
     <h3>
         < back</h3>
 </a>
 
-<div class="card">
+<div class="card m-3">
     <div class="card-body">
         <h4 class="header-title">Edit Dollar Rate</h4>
         <p class="text-right my-2">Current Dollar Rate : {{number_format($dollar_rate->lbp, 2)}}</p>

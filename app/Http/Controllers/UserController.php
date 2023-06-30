@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Log;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -33,8 +32,10 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'phone' => 'required',
+            'password' => 'required',
+            'role' => 'required',
         ]);
+
         if ($request->password == $request->password_confirmation) {
             $user = new User();
             $user->email = $request->email;
@@ -43,7 +44,7 @@ class UserController extends Controller
             $user->role = $request->role;
             $user->password = Hash::make($request->password);
 
-            $text = "User " . $request->name . " created in " . Carbon::now();
+            $text = "User " . $request->name . " created, datetime: " . now();
             Log::create(['text' => $text]);
 
             $user->save();
@@ -67,7 +68,7 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->save();
 
-        $text = "User " . $user->name . " updated in " . Carbon::now();
+        $text = "User " . $user->name . " updated, datetime: " . now();
         Log::create(['text' => $text]);
         return redirect('/users')->with('warning', 'User updated successfully');
     }
@@ -75,8 +76,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        $path = public_path($user->image);
-        $text = "User " . $user->name . " was deleted in " . Carbon::now();
+        $text = "User " . $user->name . " was deleted, datetime: " . now();
         $user->delete();
         Log::create(['text' => $text]);
         return redirect('/users')->with('danger', "User deleted successfully");

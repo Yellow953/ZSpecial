@@ -44,7 +44,7 @@
                                         <div class="d-flex justify-content-center">
                                             <a href="/client/{{$client->id}}/edit"
                                                 class="btn btn-warning btn-rounded m-1">Edit</a>
-                                            <form method="GET" action="/client/{{$client->id}}/delete">
+                                            <form method="GET" action="/client/{{$client->id}}/destroy">
                                                 @csrf
                                                 <button type="submit"
                                                     class="btn btn-danger btn-rounded show_confirm m-1"
