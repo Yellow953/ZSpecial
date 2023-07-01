@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 @endforelse
-                <div class="w-50">
+                <div class="w-50 mt-3">
                     {{ $logs->appends(['search' => request()->query('search'), 'filter_start' =>
                     request()->query('filter_start'), 'filter_end' =>
                     request()->query('filter_end')])->links() }}

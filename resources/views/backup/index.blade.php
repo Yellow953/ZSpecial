@@ -121,7 +121,8 @@
                 <form action="/backup/import/clients" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="d-flex flex-row">
-                        <input type="file" name="users" required class="form-control input-field border input-rounded">
+                        <input type="file" name="clients" required
+                            class="form-control input-field border input-rounded">
                         <button type="submit" class="btn btn-info btn-rounded m-2">Import</button>
                     </div>
                 </form>

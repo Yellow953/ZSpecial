@@ -40,14 +40,14 @@
                                         <td class="text-left">{{ucfirst($product->name)}}</td>
                                         <td>{{number_format($product->pivot->quantity)}}</td>
                                         <td>
-                                            @if ($dollar_rate->usage == true )
+                                            @if (Helper::dollar_rate()->usage == true )
                                             {{number_format(Helper::price_to_lbp($product->sell_price))}} LBP
                                             @else
                                             {{number_format($product->sell_price, 2)}} $
                                             @endif
                                         </td>
                                         <td>
-                                            @if ($dollar_rate->usage == true )
+                                            @if (Helper::dollar_rate()->usage == true )
                                             {{number_format(Helper::price_to_lbp($product->sell_price *
                                             $product->pivot->quantity))}} LBP
                                             @else
@@ -61,7 +61,7 @@
                                     <tr>
                                         <td colspan="3">total balance :</td>
                                         <td>
-                                            @if ($dollar_rate->usage == true )
+                                            @if (Helper::dollar_rate()->usage == true )
                                             {{number_format(Helper::price_to_lbp($order->total_price))}} LBP
                                             @else
                                             {{number_format($order->total_price, 2)}} $
