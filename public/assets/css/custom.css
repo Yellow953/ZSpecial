@@ -1,0 +1,34 @@
+/* Big devices */
+.hero_img {
+  width: 50vw;
+  height: 65vh;
+}
+
+.logo_hero {
+  width: 200px;
+  height: 200px;
+}
+
+/* Medium devices */
+@media only screen and (max-width: 900px) {
+  .hero_img {
+    width: 100vw;
+    height: 45vh;
+  }
+}
+
+/* Small devices */
+@media only screen and (max-width: 600px) {
+  .hero_img {
+    width: 100vw;
+    height: auto;
+  }
+
+  .logo_hero {
+    width: 75px;
+    height: 75px;
+  }
+  .header {
+    padding-top: 10px;
+  }
+}
