@@ -19,9 +19,9 @@ class HomeController extends Controller
 
         $search = request()->query('search');
         if ($search) {
-            $products = Product::where('category_id', $search)->get();
+            $products = Product::where('quantity', '!=', 0)->where('category_id', $search)->get();
         } else {
-            $products = Product::all();
+            $products = Product::where('quantity', '!=', 0)->get();
         }
 
         $data = compact('categories', 'products');

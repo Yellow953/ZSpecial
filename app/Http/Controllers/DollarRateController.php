@@ -37,7 +37,7 @@ class DollarRateController extends Controller
         $dollar_rate->save();
 
         Log::create(['text' => $text]);
-        return redirect('/')->with('success', 'Dollar Rate successfully changed');
+        return redirect('/app')->with('success', 'Dollar Rate successfully changed');
     }
 
     public function usage(Request $request)
