@@ -77,18 +77,6 @@
   padding: 10px 5px;
   border-radius: 25px;
 }
-.links {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-.link {
-  background-color: #2bcc91;
-  color: black;
-  border-radius: 50%;
-  padding: 10px;
-  margin: 5px;
-}
 .cat-active {
   background-color: #2d2c2c;
   color: white !important;

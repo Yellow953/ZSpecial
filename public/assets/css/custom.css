@@ -9,6 +9,19 @@
   height: 200px;
 }
 
+.links {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.link {
+  background-color: #2bcc91;
+  color: black;
+  border-radius: 50%;
+  padding: 10px;
+  margin: 5px;
+}
+
 /* Medium devices */
 @media only screen and (max-width: 900px) {
   .hero_img {

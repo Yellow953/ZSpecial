@@ -55,6 +55,25 @@
                 <input class="form-control input-rounded" type="text" placeholder="Description" name="description"
                     value="{{$product->description}}">
             </div>
+
+            <div class="form-group">
+                <label for="instagram_link" class="col-form-label">Instagram Link</label>
+                <input class="form-control input-rounded" type="text" placeholder="Instagram Link" name="instagram_link"
+                    value="{{$product->instagram_link}}">
+            </div>
+
+            <div class="form-group">
+                <label for="facebook_link" class="col-form-label">Facebook Link</label>
+                <input class="form-control input-rounded" type="text" placeholder="Facebook Link" name="facebook_link"
+                    value="{{$product->facebook_link}}">
+            </div>
+
+            <div class="form-group">
+                <label for="shopify_link" class="col-form-label">Shopify Link</label>
+                <input class="form-control input-rounded" type="text" placeholder="Shopify Link" name="shopify_link"
+                    value="{{$product->shopify_link}}">
+            </div>
+
             <div class="w-100 d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary btn-rounded">Update</button>
             </div>
