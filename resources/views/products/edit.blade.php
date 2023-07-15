@@ -36,10 +36,6 @@
             </div>
 
             <div class="form-group">
-                <img src="{{ $product->image }}" style="width: 100px" class="img-thumbnail image-preview" alt="">
-            </div>
-
-            <div class="form-group">
                 <label for="category_id" class="col-form-label">Category *</label>
                 <select class="form-control input-rounded" name="category_id" required>
                     <option>Choose a category</option>
@@ -66,12 +62,6 @@
                 <label for="facebook_link" class="col-form-label">Facebook Link</label>
                 <input class="form-control input-rounded" type="text" placeholder="Facebook Link" name="facebook_link"
                     value="{{$product->facebook_link}}">
-            </div>
-
-            <div class="form-group">
-                <label for="shopify_link" class="col-form-label">Shopify Link</label>
-                <input class="form-control input-rounded" type="text" placeholder="Shopify Link" name="shopify_link"
-                    value="{{$product->shopify_link}}">
             </div>
 
             <div class="w-100 d-flex justify-content-end">

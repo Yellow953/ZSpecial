@@ -10,7 +10,6 @@ return new class extends Migration {
         Schema::table('products', function (Blueprint $table) {
             $table->string('instagram_link')->nullable();
             $table->string('facebook_link')->nullable();
-            $table->string('shopify_link')->nullable();
 
         });
     }

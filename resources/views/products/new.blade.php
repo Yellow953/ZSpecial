@@ -77,12 +77,6 @@
                     value="{{old('facebook_link')}}">
             </div>
 
-            <div class="form-group">
-                <label for="shopify_link" class="col-form-label">Shopify Link</label>
-                <input class="form-control input-rounded" type="text" placeholder="Shopify Link" name="shopify_link"
-                    value="{{old('shopify_link')}}">
-            </div>
-
             <div class="w-100 d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary btn-rounded">Create</button>
             </div>
