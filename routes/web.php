@@ -83,6 +83,7 @@ Route::post('/order/create', [App\Http\Controllers\OrderController::class, 'crea
 Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index']);
 
 // Social Media
+Route::post('/sm_post', [App\Http\Controllers\SocialMediaController::class, 'sm_post']);
 Route::get('/social_media', [App\Http\Controllers\SocialMediaController::class, 'index']);
 
 Route::get('/shop', [App\Http\Controllers\HomeController::class, 'shop'])->name('shop');

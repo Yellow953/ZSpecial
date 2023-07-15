@@ -17,23 +17,49 @@ class SocialMediaController extends Controller
         return view('social_media.index');
     }
 
-    public function sm_post()
+    public function sm_post(Request $request)
     {
         $client = new SMClient();
 
         // Facebook API request
-        $facebookPostUrl = 'https://graph.facebook.com/v17.0/17841400008460056/media';
-        $facebookAccessToken = '{access-token}';
-        $facebookMediaUrl = 'https://s3-media0.fl.yelpcdn.com/bphoto/lzYN6I4QllWbNNcI4boAww/348s.jpg';
-        $facebookCaption = 'Hello, Facebook!';
+        $facebookPostUrl = 'https://graph.facebook.com/v17.0/100089876063961/media'; // Replace {user-id or page-id} with the target user or page ID.
+        $facebookAccessToken = '{facebook-access-token}'; // Replace with your Facebook access token.
+        $facebookMediaUrl = $request->image; // Make sure you have the image URL available in your $request.
+        $facebookCaption = $request->title;
+
         $facebookResponse = $client->post($facebookPostUrl, [
             'query' => ['access_token' => $facebookAccessToken],
             'form_params' => [
-                'image_url' => $facebookMediaUrl,
+                'media_url' => $facebookMediaUrl,
+                // It should be 'media_url' instead of 'image_url'.
                 'caption' => $facebookCaption
             ]
         ]);
 
-        return $facebookResponse;
+        // You can check $facebookResponse for the API response, handle any errors, or get the post ID for later reference.
+        // For example:
+        $facebookData = json_decode($facebookResponse->getBody()->getContents(), true);
+        $facebookPostId = $facebookData['id'];
+
+        // Now, for Instagram API request
+        $instagramPostUrl = 'https://graph.facebook.com/v12.0/{instagram-user-id}/media'; // Replace {instagram-user-id} with the target Instagram user ID.
+        $instagramAccessToken = '{instagram-access-token}'; // Replace with your Instagram access token.
+        $instagramMediaUrl = $request->image;
+        $instagramCaption = $request->title;
+
+        $instagramResponse = $client->post($instagramPostUrl, [
+            'query' => ['access_token' => $instagramAccessToken],
+            'form_params' => [
+                'url' => $instagramMediaUrl,
+                // It should be 'url' instead of 'image_url'.
+                'caption' => $instagramCaption
+            ]
+        ]);
+
+        // Similar to Facebook, handle the Instagram API response and get the post ID if needed.
+        $instagramData = json_decode($instagramResponse->getBody()->getContents(), true);
+        $instagramPostId = $instagramData['id'];
+
+        return "Successfully posted to Facebook (Post ID: {$facebookPostId}) and Instagram (Post ID: {$instagramPostId}).";
     }
 }
