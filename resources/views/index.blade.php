@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2 ">
                     <div class="about_box ">
-                        <figure><img src="{{asset('assets/images/about_img.png')}}" alt="#" /></figure>
+                        <figure><img src="{{asset('assets/images/shop.png')}}" alt="#" /></figure>
                         <a class="read_more" href="#">Read more</a>
                     </div>
                 </div>
@@ -100,15 +100,13 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="test_box">
-                                                    <h3>Michl ro</h3>
+                                                    <h3>Carla Barrak</h3>
                                                     <p><i class="padd_rightt0"><img
                                                                 src="{{asset('assets/images/te1.png')}}"
-                                                                alt="#" /></i>There are many variations of passages of
-                                                        Lorem Ipsum available, but the majority have suffered alteration
-                                                        in some <i class="padd_leftt0"><img
+                                                                alt="#" /></i>High quality with affordable prices !
+                                                        professional customer service 👌🏻Highly recommend<i
+                                                            class="padd_leftt0"><img
                                                                 src="{{asset('assets/images/te2.png')}}" alt="#" /></i>
-                                                        <br>form, by injected humour, or
-                                                        randomised words which don't look even slightly believable
                                                     </p>
                                                 </div>
                                             </div>
@@ -122,15 +120,13 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="test_box">
-                                                    <h3>Michl ro</h3>
+                                                    <h3>Rita Abouarraj</h3>
                                                     <p><i class="padd_rightt0"><img
                                                                 src="{{asset('assets/images/te1.png')}}"
-                                                                alt="#" /></i>There are many variations of passages of
-                                                        Lorem Ipsum available, but the majority have suffered alteration
-                                                        in some <i class="padd_leftt0"><img
+                                                                alt="#" /></i>Loved the wine opener! So easy to use and
+                                                        the design is just perfect! Highly recommended<i
+                                                            class="padd_leftt0"><img
                                                                 src="{{asset('assets/images/te2.png')}}" alt="#" /></i>
-                                                        <br>form, by injected humour, or
-                                                        randomised words which don't look even slightly believable
                                                     </p>
                                                 </div>
                                             </div>
@@ -144,15 +140,16 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="test_box">
-                                                    <h3>Michl ro</h3>
+                                                    <h3>Nour Sayyed</h3>
                                                     <p><i class="padd_rightt0"><img
-                                                                src="{{asset('assets/images/te1.png')}}"
-                                                                alt="#" /></i>There are many variations of passages of
-                                                        Lorem Ipsum available, but the majority have suffered alteration
-                                                        in some <i class="padd_leftt0"><img
-                                                                src="{{asset('assets/images/te2.png')}}" alt="#" /></i>
-                                                        <br>form, by injected humour, or
-                                                        randomised words which don't look even slightly believable
+                                                                src="{{asset('assets/images/te1.png')}}" alt="#" /></i>
+                                                        ماشاء الله منتجات جميله جداااااااااااااا 🌹🌹
+                                                        <i class="padd_leftt0"><img
+                                                                src="{{asset('assets/images/te2.png')}}"
+                                                                alt="#" /></i><br>
+                                                        والمعامله فوق الممتاز واسعاركوا كويسه جدا مقارنه بالمحلات بجد
+                                                        ربنا يوفقكوا ودايما من نجاح لنجاح ❤️❤️
+
                                                     </p>
                                                 </div>
                                             </div>

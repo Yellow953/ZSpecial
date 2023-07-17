@@ -34,7 +34,12 @@
                                         <a class="nav-link text-dark" href="/shop">Shop</a>
                                     </li>
                                 </ul>
+
+                                @auth
+                                <div class="sign_btn"><a href="/app">App</a></div>
+                                @else
                                 <div class="sign_btn"><a href="/login">Sign in</a></div>
+                                @endauth
                             </div>
                         </nav>
                     </div>

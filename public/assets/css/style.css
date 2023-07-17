@@ -448,7 +448,7 @@ button {
 
 .about .titlepage h2 {
   margin-bottom: 20px;
-  color: #fff;
+  color: #2bcc91;
 }
 
 .about .titlepage span {
@@ -465,19 +465,14 @@ button {
 }
 
 .about .about_box figure img {
-  width: 100%;
+  width: 300px;
 }
 
 .about .about_box .read_more {
-  background: #000;
-  color: #fff;
+  background: #2bcc91;
+  color: black;
   border-radius: 15px;
 }
-
-.about .about_box .read_more:hover {
-  background: #f55171;
-}
-
 /** end about section **/
 
 /** best section **/

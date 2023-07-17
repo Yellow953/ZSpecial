@@ -32,12 +32,14 @@
             <div class="login-box ptb--100">
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
-                    <div class="login-form-head">
+                    <div class="login-form-head"
+                        style="border-radius: 25px 25px 0 0; border: 1px black solid; border-bottom: none;">
                         <h4>Login</h4>
                     </div>
-                    <div class="login-form-body">
+                    <div class="login-form-body"
+                        style="border-radius: 0 0 25px 25px; border: 1px black solid; border-top: none;">
                         <div class="form-gp">
-                            <label for="email">Email Address *</label>
+                            <label for="email" class="text-dark">Email Address *</label>
                             <input type="email" id="email" name="email" value="{{ old('email') }}" required
                                 autocomplete="email" autofocus>
                             @error('email')
@@ -47,7 +49,7 @@
                             @enderror
                         </div>
                         <div class="form-gp">
-                            <label for="password">Password *</label>
+                            <label for="password" class="text-dark">Password *</label>
                             <input type="password" id="password" name="password" required autofocus>
                             @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -56,7 +58,8 @@
                             @enderror
                         </div>
                         <div class="submit-btn-area">
-                            <button id="form_submit" type="submit">Login <i class="ti-arrow-right"></i></button>
+                            <button id="form_submit" type="submit" class="bg-primary text-white">Login <i
+                                    class="ti-arrow-right"></i></button>
                         </div>
                     </div>
                 </form>
