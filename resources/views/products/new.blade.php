@@ -32,12 +32,6 @@
                     value="{{ old('sell_price') }}">
             </div>
             <div class="form-group">
-                <label for="barcode" class="col-form-label">Barcode *</label>
-                <input class="form-control input-rounded" type="text" placeholder="Barcode" name="barcode"
-                    value="{{old('barcode')}}">
-            </div>
-
-            <div class="form-group">
                 <label for="image" class="col-form-label">Image</label>
                 <input class="form-control input-rounded image" name="image" type="file">
             </div>

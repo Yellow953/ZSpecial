@@ -21,19 +21,6 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
-    public function search(Request $request)
-    {
-        $query = $request->search;
-
-        $result = Product::where('barcode', $query)->get()->first();
-
-        if ($result == null) {
-            abort(400, 'Bad Request');
-        } else {
-            return response()->json($result);
-        }
-    }
-
     public function new()
     {
         $categories = Category::all();
@@ -48,7 +35,6 @@ class ProductController extends Controller
             'buy_price' => 'required|numeric',
             'sell_price' => 'required|numeric',
             'category_id' => 'required',
-            'barcode' => 'required',
         ]);
 
         if ($request->quantity <= 0 || $request->buy_price <= 0 || $request->sell_price <= 0) {
@@ -61,7 +47,6 @@ class ProductController extends Controller
         $product->buy_price = $request->buy_price;
         $product->sell_price = $request->sell_price;
         $product->category_id = $request->category_id;
-        $product->barcode = $request->barcode;
         $product->description = $request->description;
 
         if ($request->hasFile('image')) {
@@ -99,7 +84,6 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->buy_price = $request->buy_price;
         $product->sell_price = $request->sell_price;
-        $product->barcode = $request->barcode;
         $product->description = $request->description;
 
         if ($request->hasFile('image')) {

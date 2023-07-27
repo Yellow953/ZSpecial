@@ -58,7 +58,6 @@
                                         {{$product->getProfit()}}%
                                     </td>
                                     <td>
-                                        {{$product->barcode}}<br>
                                         {{ucfirst($product->category->name)}}<br>
                                         {{$product->description}}
                                     </td>

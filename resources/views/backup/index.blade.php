@@ -115,26 +115,6 @@
         </div>
         <hr>
 
-        <h5 class="text-secondary mt-2 text-decoration-underline">Clients</h5>
-        <div class="row my-2 ">
-            <div class="col-md-6">
-                <form action="/backup/import/clients" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="d-flex flex-row">
-                        <input type="file" name="clients" required
-                            class="form-control input-field border input-rounded">
-                        <button type="submit" class="btn btn-info btn-rounded m-2">Import</button>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-6">
-                <a href="/backup/export/clients" class="text-center btn btn-info m-2 btn-rounded">
-                    Export
-                </a>
-            </div>
-        </div>
-        <hr>
-
         <h5 class="text-secondary mt-2 text-decoration-underline">Orders</h5>
         <div class="row my-2 ">
             <div class="col-md-6">

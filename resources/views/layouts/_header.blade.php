@@ -35,11 +35,11 @@
                                     </li>
                                 </ul>
 
-                                @auth
+                                @if(auth()->user() && auth()->user()->role == 'admin')
                                 <div class="sign_btn"><a href="/app">App</a></div>
                                 @else
                                 <div class="sign_btn"><a href="/login">Sign in</a></div>
-                                @endauth
+                                @endif
                             </div>
                         </nav>
                     </div>
@@ -55,11 +55,11 @@
                     <div class="col-md-5">
                         <div class="text-bg">
                             <h1>A Destination for the Extraordinary</h1>
-                            <span>Shop safe here</span>
-                            <a href="/shop">Buy Now</a>
+                            <span>Shop safely wwith us </span>
+                            <a href="/shop">Discover Products</a>
                         </div>
                     </div>
-                    <div class="col-md-7 padding_right1">
+                    <div class="d-none d-md-block col-md-7 padding_right1">
                         <div class="text-img">
                             <figure><img src="{{asset('assets/images/products.png')}}" alt="#" class="hero_img" />
                             </figure>

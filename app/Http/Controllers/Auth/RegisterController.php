@@ -13,7 +13,7 @@ class RegisterController extends Controller
 {
     use RegistersUsers;
 
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::SHOP;
 
     public function __construct()
     {
@@ -35,6 +35,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
+            'address' => $data['address'],
             'role' => 'user',
             'password' => Hash::make($data['password']),
         ]);

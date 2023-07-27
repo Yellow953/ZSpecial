@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Models\Log;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Client;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -61,39 +60,6 @@ class BackupController extends Controller
         return response()->file($fileName);
     }
 
-    public function ExportClients()
-    {
-        $data = Client::all();
-
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-
-        $sheet->setCellValue('A1', 'ID');
-        $sheet->setCellValue('B1', 'Name');
-        $sheet->setCellValue('C1', 'Email');
-        $sheet->setCellValue('D1', 'Phone Number');
-        $sheet->setCellValue('E1', 'Address');
-        $sheet->setCellValue('F1', 'Created At');
-        $rows = 2;
-
-        foreach ($data as $d) {
-            $sheet->setCellValue('A' . $rows, $d->id);
-            $sheet->setCellValue('B' . $rows, $d->name);
-            $sheet->setCellValue('C' . $rows, $d->email);
-            $sheet->setCellValue('D' . $rows, $d->phone);
-            $sheet->setCellValue('E' . $rows, $d->address ?? '');
-            $sheet->setCellValue('F' . $rows, $d->created_at);
-            $rows++;
-        }
-
-        $fileName = "Clients.xls";
-        $writer = new Xls($spreadsheet);
-        $writer->save($fileName);
-        header("Content-Type: application/xls");
-        header("Content-Disposition: attachement; filename: " . $fileName);
-        return response()->file($fileName);
-    }
-
     public function ExportCategories()
     {
         $data = Category::all();
@@ -136,9 +102,8 @@ class BackupController extends Controller
         $sheet->setCellValue('D1', 'Buy Price');
         $sheet->setCellValue('E1', 'Sell Price');
         $sheet->setCellValue('F1', 'Category ID');
-        $sheet->setCellValue('G1', 'Barcode');
-        $sheet->setCellValue('H1', 'Description');
-        $sheet->setCellValue('I1', 'Created At');
+        $sheet->setCellValue('G1', 'Description');
+        $sheet->setCellValue('H1', 'Created At');
         $rows = 2;
 
         foreach ($data as $d) {
@@ -148,9 +113,8 @@ class BackupController extends Controller
             $sheet->setCellValue('D' . $rows, $d->buy_price);
             $sheet->setCellValue('E' . $rows, $d->sell_price);
             $sheet->setCellValue('F' . $rows, $d->category_id);
-            $sheet->setCellValue('G' . $rows, $d->barcode ?? '');
-            $sheet->setCellValue('H' . $rows, $d->description ?? '');
-            $sheet->setCellValue('I' . $rows, $d->created_at);
+            $sheet->setCellValue('G' . $rows, $d->description ?? '');
+            $sheet->setCellValue('H' . $rows, $d->created_at);
             $rows++;
         }
 
@@ -253,41 +217,6 @@ class BackupController extends Controller
         return redirect()->back()->with('success', 'Users imported successfully!');
     }
 
-    public function ImportClients(Request $request)
-    {
-        $this->validate($request, [
-            'clients' => 'required|file|mimes:xls,xlsx'
-        ]);
-        $the_file = $request->file('clients');
-
-        $spreadsheet = IOFactory::load($the_file->getRealPath());
-        $sheet = $spreadsheet->getActiveSheet();
-        $row_limit = $sheet->getHighestDataRow();
-        $column_limit = $sheet->getHighestDataColumn();
-        $row_range = range(2, $row_limit);
-
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        Client::truncate();
-
-        foreach ($row_range as $row) {
-            $client = new Client();
-            $client->id = $sheet->getCell('A' . $row)->getValue();
-            $client->name = $sheet->getCell('B' . $row)->getValue();
-            $client->email = $sheet->getCell('C' . $row)->getValue();
-            $client->phone = $sheet->getCell('D' . $row)->getValue();
-            $client->address = $sheet->getCell('E' . $row)->getValue() ?? '';
-            $client->created_at = Carbon::parse($sheet->getCell('F' . $row)->getValue()) ?? Carbon::now();
-            $client->save();
-        }
-
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
-        $log = new Log();
-        $log->text = Auth()->user()->name . " imported all clients, datetime: " . now();
-        $log->save();
-        return redirect()->back()->with('success', 'Clients imported successfully!');
-    }
-
     public function ImportCategories(Request $request)
     {
         $this->validate($request, [
@@ -345,9 +274,8 @@ class BackupController extends Controller
             $product->buy_price = $sheet->getCell('D' . $row)->getValue();
             $product->sell_price = $sheet->getCell('E' . $row)->getValue();
             $product->category_id = $sheet->getCell('F' . $row)->getValue();
-            $product->barcode = $sheet->getCell('G' . $row)->getValue() ?? '';
-            $product->description = $sheet->getCell('H' . $row)->getValue() ?? '';
-            $product->created_at = Carbon::parse($sheet->getCell('I' . $row)->getValue()) ??
+            $product->description = $sheet->getCell('G' . $row)->getValue() ?? '';
+            $product->created_at = Carbon::parse($sheet->getCell('H' . $row)->getValue()) ??
                 $product->image = 'assets/images/no_img.png';
             Carbon::now();
             $product->save();

@@ -18,7 +18,7 @@ class LoginController extends Controller
         if ($user->role == 'admin') {
             return redirect('/app');
         } else {
-            return redirect('/');
+            return redirect('/shop');
         }
     }
 
