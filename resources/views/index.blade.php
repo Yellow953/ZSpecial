@@ -28,7 +28,6 @@
                 <div class="col-md-8 offset-md-2 ">
                     <div class="about_box ">
                         <figure><img src="{{asset('assets/images/shop.png')}}" alt="#" /></figure>
-                        <a class="read_more" href="#">Read more</a>
                     </div>
                 </div>
             </div>

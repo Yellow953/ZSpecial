@@ -35,8 +35,12 @@
                                     </li>
                                 </ul>
 
-                                @if(auth()->user() && auth()->user()->role == 'admin')
+                                @if(auth()->user())
+                                @if (auth()->user()->role == 'admin')
                                 <div class="sign_btn"><a href="/app">App</a></div>
+                                @else
+                                <div class="sign_btn"><a href="/cart">Cart ({{Helper::cart_count()}})</a></div>
+                                @endif
                                 @else
                                 <div class="sign_btn"><a href="/login">Sign in</a></div>
                                 @endif
@@ -63,7 +67,6 @@
                         <div class="text-img">
                             <figure><img src="{{asset('assets/images/products.png')}}" alt="#" class="hero_img" />
                             </figure>
-                            <h3>01</h3>
                         </div>
                     </div>
                 </div>

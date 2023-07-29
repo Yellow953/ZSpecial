@@ -6,8 +6,9 @@
                 <div class="col-md-3">
                     <div class="cont">
                         <h3 class="text-center"> <strong class="multi"> Whatsapp Us</strong><br>
-                            <a href="https://api.whatsapp.com/send/?phone=96181495312" target="_blank">ZSpecial
-                                Support
+                            <a href="https://api.whatsapp.com/send/?phone=96181495312" target="_blank">
+                                +961 81 495 312
+
                             </a>
                         </h3>
                     </div>

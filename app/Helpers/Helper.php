@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Cart;
 use App\Models\DollarRate;
 
 class Helper
@@ -25,6 +26,15 @@ class Helper
             $dollar_rate = DollarRate::all()->first();
         }
         return $price * $dollar_rate->lbp;
+    }
+
+    public static function cart_count()
+    {
+        if (auth()->user()) {
+            return Cart::where('user_id', auth()->user()->id)->get()->count();
+        } else {
+            return 0;
+        }
     }
 
 }

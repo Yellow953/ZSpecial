@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bundle;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     public function index()
     {
-        return view('index');
+        $bundles = Bundle::latest(5);
+        return view('index', compact('bundles'));
     }
 
     public function shop()
@@ -27,4 +34,10 @@ class HomeController extends Controller
         $data = compact('categories', 'products');
         return view('shop', $data);
     }
+
+    public function checkout(Request $request)
+    {
+
+    }
+
 }

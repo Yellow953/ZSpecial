@@ -33,8 +33,22 @@
                                 <a class="nav-link text-dark" href="/shop">Shop</a>
                             </li>
                         </ul>
-                        @if(auth()->user() && auth()->user()->role == 'admin')
+                        @if(auth()->user())
+                        @if (auth()->user()->role == 'admin')
                         <div class="sign_btn"><a href="/app">App</a></div>
+                        @else
+                        <li class="nav-item">
+                            <a href="{{ route('logout') }}" class="nav-link text-dark"
+                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                LOGOUT
+                            </a>
+                        </li>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                        <div class="sign_btn"><a href="/cart">Cart ({{Helper::cart_count()}})</a></div>
+                        @endif
                         @else
                         <div class="sign_btn"><a href="/login">Sign in</a></div>
                         @endif
@@ -135,9 +149,12 @@
                                         @endif
 
 
-                                        <form action="" method="post" enctype="multipart/form-data" class="w-100 my-2">
+                                        <form action="/cart/create" method="post" enctype="multipart/form-data"
+                                            class="w-100 my-2">
                                             @csrf
                                             <div class="w-100 d-flex justify-content-end">
+                                                <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+                                                <input type="hidden" name="product_id" value="{{$product->id}}">
                                                 <input type="number" name="quantity" id="quantity"
                                                     class="form-control input-field quantity-field" value="1" step="1">
 

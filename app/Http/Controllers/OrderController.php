@@ -154,4 +154,14 @@ class OrderController extends Controller
         return redirect('/orders');
 
     } //end of order
+
+    public function complete($id)
+    {
+        $order = Order::find($id);
+        $order->update([
+            'status' => 'completed'
+        ]);
+        return redirect()->back()->with('success', 'Order successfully completed!');
+    }
+
 }

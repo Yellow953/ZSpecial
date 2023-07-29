@@ -15,10 +15,16 @@ return new class extends Migration {
             $table->double('sell_price')->unsigned()->default(0);
             $table->string('description')->nullable();
             $table->string('image')->default('assets/images/no_img.png');
+
+            $table->string('instagram_link')->nullable();
+            $table->string('facebook_link')->nullable();
+
             $table->bigInteger("category_id")->unsigned();
+            $table->bigInteger("bundle_id")->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('bundle_id')->references('id')->on('bundles')->onDelete('cascade');
         });
     }
 

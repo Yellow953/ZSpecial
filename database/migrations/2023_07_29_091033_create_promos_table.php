@@ -7,17 +7,19 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('promos', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
-            $table->string('status')->default('new');
-            $table->double('total_price')->unsigned()->nullable();
+
+            $table->string('name')->unique();
+            $table->double('value')->default('0');
+            $table->date('valid_untill')->nullable();
+
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('promos');
     }
 };

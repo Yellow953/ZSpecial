@@ -57,6 +57,11 @@
                             </span>
                             @enderror
                         </div>
+
+                        <div class="form-footer text-center mt-5">
+                            <p class="text-muted">Don't have an account? <a href="/register">Sign up</a></p>
+                        </div>
+
                         <div class="submit-btn-area">
                             <button id="form_submit" type="submit" class="bg-primary text-white">Login <i
                                     class="ti-arrow-right"></i></button>

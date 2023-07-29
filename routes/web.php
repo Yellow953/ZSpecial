@@ -64,18 +64,44 @@ Route::get('/product/{id}/destroy', [App\Http\Controllers\ProductController::cla
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'index']);
 
 // Orders
+Route::get('/order/{id}/complete', [App\Http\Controllers\OrderController::class, 'complete']);
 Route::get('/order/{id}/edit', [App\Http\Controllers\OrderController::class, 'edit']);
 Route::post('/order/{id}/update', [App\Http\Controllers\OrderController::class, 'update']);
 Route::get('/order/{id}/destroy', [App\Http\Controllers\OrderController::class, 'destroy']);
 Route::get('/order/{id}/show', [App\Http\Controllers\OrderController::class, 'show']);
 Route::get('/order/new', [App\Http\Controllers\OrderController::class, 'new']);
 Route::post('/order/create', [App\Http\Controllers\OrderController::class, 'create']);
+Route::post('/order/checkout', [App\Http\Controllers\HomeController::class, 'checkout']);
 Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index']);
+
+// Cart
+Route::post('/cart/create', [App\Http\Controllers\CartController::class, 'create']);
+Route::get('/cart/{id}/destroy', [App\Http\Controllers\CartController::class, 'destroy']);
+Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart');
+
+// Promo
+Route::get('/promo/{id}/edit', [App\Http\Controllers\PromoController::class, 'edit']);
+Route::post('/promo/{id}/update', [App\Http\Controllers\PromoController::class, 'update']);
+Route::get('/promo/{id}/destroy', [App\Http\Controllers\PromoController::class, 'destroy']);
+Route::get('/promo/{id}/show', [App\Http\Controllers\PromoController::class, 'show']);
+Route::get('/promo/new', [App\Http\Controllers\PromoController::class, 'new']);
+Route::post('/promo/create', [App\Http\Controllers\PromoController::class, 'create']);
+Route::get('/promos', [App\Http\Controllers\PromoController::class, 'index']);
+
+// Bundle
+Route::get('/bundle/{id}/edit', [App\Http\Controllers\BundleController::class, 'edit']);
+Route::post('/bundle/{id}/update', [App\Http\Controllers\BundleController::class, 'update']);
+Route::get('/bundle/{id}/destroy', [App\Http\Controllers\BundleController::class, 'destroy']);
+Route::get('/bundle/{id}/show', [App\Http\Controllers\BundleController::class, 'show']);
+Route::get('/bundle/new', [App\Http\Controllers\BundleController::class, 'new']);
+Route::post('/bundle/create', [App\Http\Controllers\BundleController::class, 'create']);
+Route::get('/bundles', [App\Http\Controllers\BundleController::class, 'index']);
 
 // Social Media
 Route::post('/sm_post', [App\Http\Controllers\SocialMediaController::class, 'sm_post']);
 Route::get('/social_media', [App\Http\Controllers\SocialMediaController::class, 'index']);
 
+// Shop
 Route::get('/shop', [App\Http\Controllers\HomeController::class, 'shop'])->name('shop');
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

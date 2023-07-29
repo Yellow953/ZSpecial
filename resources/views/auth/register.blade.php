@@ -39,7 +39,7 @@
                         <div class="form-gp">
                             <label for="name">Name *</label>
                             <input type="text" id="name" name="name" value="{{ old('name') }}" required
-                                autocomplete="name" autofocus>
+                                autocomplete="name">
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -49,7 +49,7 @@
                         <div class="form-gp">
                             <label for="email">Email Address *</label>
                             <input type="email" id="email" name="email" value="{{ old('email') }}" required
-                                autocomplete="email" autofocus>
+                                autocomplete="email">
                             @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -57,9 +57,9 @@
                             @enderror
                         </div>
                         <div class="form-gp">
-                            <label for="phone">Phone Number</label>
+                            <label for="phone">Phone Number *</label>
                             <input type="phone" id="phone" name="phone" value="{{ old('phone') }}" autocomplete="phone"
-                                autofocus>
+                                required>
                             @error('phone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -67,8 +67,18 @@
                             @enderror
                         </div>
                         <div class="form-gp">
+                            <label for="address">Address *</label>
+                            <input type="text" id="address" name="address" value="{{ old('address') }}"
+                                autocomplete="address" required>
+                            @error('address')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="form-gp">
                             <label for="password">Password *</label>
-                            <input type="password" id="password" name="password" required autofocus>
+                            <input type="password" id="password" name="password" required>
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -77,8 +87,7 @@
                         </div>
                         <div class="form-gp">
                             <label for="password_confirmation">Password Confirmation *</label>
-                            <input type="password" id="password_confirmation" name="password_confirmation" required
-                                autofocus>
+                            <input type="password" id="password_confirmation" name="password_confirmation" required>
                             @error('password_confirmation')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -86,7 +95,8 @@
                             @enderror
                         </div>
                         <div class="submit-btn-area">
-                            <button id="form_submit" type="submit">Register <i class="ti-arrow-right"></i></button>
+                            <button id="form_submit" type="submit" class="bg-primary text-white">Register <i
+                                    class="ti-arrow-right"></i></button>
                         </div>
                         <div class="form-footer text-center mt-5">
                             <p class="text-muted">Already have an account? <a href="/login">Login</a></p>
