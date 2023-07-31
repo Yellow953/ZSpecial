@@ -71,6 +71,11 @@
                     value="{{old('facebook_link')}}">
             </div>
 
+            <div class="form-group d-flex">
+                <input class="" type="checkbox" name="is_bundle">
+                <label for="is_bundle" class="col-form-label mx-2">Bundle</label>
+            </div>
+
             <div class="w-100 d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary btn-rounded">Create</button>
             </div>

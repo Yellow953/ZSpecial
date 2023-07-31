@@ -74,15 +74,25 @@
                     <div class="col-3 mb-2">
                         <img class="w-100" src="{{asset($cart_item->product->image)}}" alt="art image">
                     </div>
-                    <div class="col-5 mb-2">
+                    <div class="col-3 mb-2">
                         <h6 class="">{{$cart_item->product->name}}</h6>
                     </div>
                     <div class="col-2">
                         <p id="cartItem{{$cart_item->id}}Quantity">{{$cart_item->quantity}}</p>
                     </div>
                     <div class="col-2">
-                        <p id="cartItem{{$cart_item->id}}Price">${{number_format($cart_item->product->sell_price,
+                        <p id="cartItem{{$cart_item->id}}Price">${{number_format($cart_item->product->sell_price *
+                            $cart_item->quantity,
                             2)}}</p>
+                    </div>
+                    <div class="col-2">
+                        <a href="/cart/{{$cart_item->id}}/destroy" class="btn btn-danger pt-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
                 <hr>
@@ -91,33 +101,34 @@
                 @endforelse
             </div>
             <div class="col-12 col-sm-4 p-3 proceed form">
-                <div class="row m-0">
-                    <div class="col-sm-8 p-0">
-                        <h6>Subtotal</h6>
-                    </div>
-                    <div class="col-sm-4 p-0">
-                        <p id="subtotal">${{number_format($sub_total, 2)}}</p>
-                    </div>
-                </div>
-                <div class="row m-0">
-                    <div class="col-sm-8 p-0 ">
-                        <h6>Promo</h6>
-                    </div>
-                    <div class="col-sm-4 p-0">
-                        <p id="tax">%{{$promo}}</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row mx-0 mb-2">
-                    <div class="col-sm-8 p-0 d-inline">
-                        <h5>Total</h5>
-                    </div>
-                    <div class="col-sm-4 p-0">
-                        <p id="total">${{number_format($total, 2)}}</p>
-                    </div>
-                </div>
                 <form action="/order/checkout" method="post" enctype="multipart/form-data">
                     @csrf
+                    <div class="row m-0">
+                        <div class="col-sm-8 p-0">
+                            <h6>Subtotal</h6>
+                        </div>
+                        <div class="col-sm-4 p-0">
+                            <p id="subtotal">${{number_format($sub_total, 2)}}</p>
+                        </div>
+                    </div>
+                    <div class="row m-0">
+                        <div class="col-sm-8 p-0 ">
+                            <h6>Promo</h6>
+                        </div>
+                        <div class="col-sm-4 p-0">
+                            <input type="text" name="promo" id="promo" placeholder="Promo" style="width: 100px;">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mx-0 mb-2">
+                        <div class="col-sm-8 p-0 d-inline">
+                            <h5>Total</h5>
+                        </div>
+                        <div class="col-sm-4 p-0">
+                            <p id="total">${{number_format($total, 2)}}</p>
+                        </div>
+                    </div>
+
                     <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                     <button typr="submit" id="btn-checkout" class="shopnow"><span>Order</span></button>
                 </form>

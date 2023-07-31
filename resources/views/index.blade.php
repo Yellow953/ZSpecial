@@ -6,6 +6,36 @@
 <body class="main-layout">
     @include('layouts._header')
 
+    <section id="bundles" class="w-100">
+        <h1 class="mt-5 mb-3 text-center">Bundles</h1>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                @foreach ($bundles->chunk(3) as $key => $bundleSet)
+                <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                    <div class="row">
+                        @foreach ($bundleSet as $bundle)
+                        <div class="col-md-4">
+                            <a href="/shop#{{$bundle->id}}" class="w-100">
+                                <img src="{{ asset($bundle->image) }}" class="img-fluid carousel-img">
+                                <h2 class="text-center my-2">{{$bundle->name}}</h2>
+                            </a>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </section>
+
     <!-- about -->
     <div id="about" class="about">
         <div class="container">

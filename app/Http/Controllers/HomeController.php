@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bundle;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Promo;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -16,7 +17,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $bundles = Bundle::latest(5);
+        $bundles = Product::where('is_bundle', true)->get();
         return view('index', compact('bundles'));
     }
 
@@ -35,9 +36,61 @@ class HomeController extends Controller
         return view('shop', $data);
     }
 
+    public function cart()
+    {
+        $sub_total = 0;
+        $total = 0;
+        $cart_items = Cart::where('user_id', auth()->user()->id)->get();
+
+        foreach ($cart_items as $cart_item) {
+            $sub_total += $cart_item->product->sell_price * $cart_item->quantity;
+        }
+        $total = $sub_total;
+
+        $data = compact('cart_items', 'sub_total', 'total');
+        return view('cart', $data);
+    }
+
     public function checkout(Request $request)
     {
+        $discount = 0;
+        $total_price = 0;
 
+        $cart_items = Cart::where('user_id', auth()->user()->id)->get();
+
+        if ($request->promo != null) {
+            $promo = Promo::where('name', 'LIKE', $request->promo)->get()->first();
+            $discount = $promo->value;
+        }
+
+        $order = auth()->user()->orders()->create([]);
+
+        foreach ($cart_items as $cart_item) {
+            $product = Product::FindOrFail($cart_item->product_id);
+
+            if (($product->quantity - $cart_item->quantity) < 0 || $cart_item->quantity < 0) {
+                return redirect()->back()->with('danger', 'Product not available...');
+            }
+
+            $order->products()->attach($product, ['quantity' => $cart_item->quantity]);
+            $total_price += $product->sell_price * $cart_item->quantity;
+
+            $product->update([
+                'quantity' => $product->quantity - $cart_item->quantity
+            ]);
+
+            if ($discount != 0) {
+                $total_price -= ($total_price * $discount);
+            }
+
+            $order->update([
+                'total_price' => $total_price
+            ]);
+
+            $cart_item->delete();
+        }
+
+        return redirect()->back()->with('success', 'Order submitted, thank you for choosing us!');
     }
 
 }

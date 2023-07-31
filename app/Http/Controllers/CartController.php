@@ -9,23 +9,7 @@ class CartController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-    }
-
-    public function index()
-    {
-        $sub_total = 0;
-        $total = 0;
-        $promo = 10;
-        $cart_items = Cart::where('user_id', auth()->user()->id)->get();
-
-        foreach ($cart_items as $cart_item) {
-            $sub_total += $cart_item->product->sell_price * $cart_item->quantity;
-        }
-        $total = $sub_total * $promo;
-
-        $data = compact('cart_items', 'sub_total', 'total', 'promo');
-        return view('cart', $data);
+        $this->middleware('admin');
     }
 
     public function create(Request $request)

@@ -49,6 +49,12 @@ class ProductController extends Controller
         $product->category_id = $request->category_id;
         $product->description = $request->description;
 
+        if ($request->is_bundle) {
+            $product->is_bundle = true;
+        } else {
+            $product->is_bundle = false;
+        }
+
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();

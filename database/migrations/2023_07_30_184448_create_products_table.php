@@ -20,11 +20,10 @@ return new class extends Migration {
             $table->string('facebook_link')->nullable();
 
             $table->bigInteger("category_id")->unsigned();
-            $table->bigInteger("bundle_id")->unsigned()->nullable();
+            $table->float("is_bundle")->default(false);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('bundle_id')->references('id')->on('bundles')->onDelete('cascade');
         });
     }
 
