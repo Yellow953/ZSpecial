@@ -61,7 +61,7 @@
 
 <br><br><br><br><br>
 
-<h3 class="heading">ZSpecial's Products</h3>
+<h3 class="heading custom-font">ZSpecial's Products</h3>
 
 <div class="container d-flex justify-content-center">
     <div class="custom_header_bg" style="width:fit-content;">
@@ -87,7 +87,7 @@
 
                 </div>
                 <div class="card-body">
-                    <h5 class="text-center">{{ucfirst($product->name)}}</h5>
+                    <h5 class="text-center custom-font">{{ucfirst($product->name)}}</h5>
 
                     <div class="text-center">
                         <button type="button" class="btn btn-primary mt-4 px-4 py-2 rounded-20" data-toggle="modal"
@@ -102,7 +102,7 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h2>{{ucwords($product->name)}}</h2>
+                                        <h2 class="custom-font">{{ucwords($product->name)}}</h2>
 
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>

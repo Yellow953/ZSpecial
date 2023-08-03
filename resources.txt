@@ -2,8 +2,9 @@ bright green: #2bcc91
 
 logo green #2F6665
 logo gold #AD9249
-f5bf2f
-5CE1E6
+Gold f5bf2f
+Blue 5CE1E6
+Blue 2 46a3a6
 
 A Destination for the Extraordinary
 

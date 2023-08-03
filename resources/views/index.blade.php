@@ -7,7 +7,7 @@
     @include('layouts._header')
 
     <section id="bundles" class="w-100">
-        <h1 class="mt-5 mb-3 text-center">Bundles</h1>
+        <h1 class="mt-5 mb-3 text-center custom-font">Bundles</h1>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 @foreach ($bundles->chunk(3) as $key => $bundleSet)
@@ -17,7 +17,7 @@
                         <div class="col-md-4">
                             <a href="/shop#{{$bundle->id}}" class="w-100">
                                 <img src="{{ asset($bundle->image) }}" class="img-fluid carousel-img">
-                                <h2 class="text-center my-2">{{$bundle->name}}</h2>
+                                <h2 class="text-center my-2 custom-font">{{$bundle->name}}</h2>
                             </a>
                         </div>
                         @endforeach
@@ -42,7 +42,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="titlepage">
-                        <h2>About ZSpecial</h2>
+                        <h2 class="custom-font my-5">About ZSpecial</h2>
                         <span>Welcome to the special shop, where we curate a unique collection of items from around the
                             world! Our mission is to bring you a variety of special products that you won't find
                             anywhere else. From kitchen to bar accessories, special gadgets and tools to solve daily
@@ -70,7 +70,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="titlepage">
-                        <h2>Shop With ZSpecial</h2>
+                        <h2 class="custom-font">Shop With ZSpecial</h2>
                         <span>A Destination for the Extraordinary</span>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="best_box">
-                        <h4>Full Money Back Guarantee</h4>
+                        <h4>Money Back Guarantee</h4>
                         <p>Shop with confidence thanks to our hassle-free refund policy. If you're not satisfied with
                             your purchase, our team will assist you with a smooth return process.
                         </p>
@@ -110,7 +110,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="titlepage">
-                        <h2>Testimonial</h2>
+                        <h2 class="custom-font">Testimonial</h2>
                     </div>
                 </div>
             </div>
@@ -129,13 +129,15 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="test_box">
-                                                    <h3>Carla Barrak</h3>
+                                                    <h3 class="custom-font">Carla Barrak</h3>
                                                     <p><i class="padd_rightt0"><img
-                                                                src="{{asset('assets/images/te1.png')}}"
-                                                                alt="#" /></i>High quality with affordable prices !
+                                                                src="{{asset('assets/images/te1.png')}}" alt="#"
+                                                                class="testemonial_img" /></i>High quality with
+                                                        affordable prices !
                                                         professional customer service 👌🏻Highly recommend<i
                                                             class="padd_leftt0"><img
-                                                                src="{{asset('assets/images/te2.png')}}" alt="#" /></i>
+                                                                src="{{asset('assets/images/te2.png')}}" alt="#"
+                                                                class="testemonial_img" /></i>
                                                     </p>
                                                 </div>
                                             </div>
@@ -151,11 +153,13 @@
                                                 <div class="test_box">
                                                     <h3>Rita Abouarraj</h3>
                                                     <p><i class="padd_rightt0"><img
-                                                                src="{{asset('assets/images/te1.png')}}"
-                                                                alt="#" /></i>Loved the wine opener! So easy to use and
+                                                                src="{{asset('assets/images/te1.png')}}" alt="#"
+                                                                class="testemonial_img" /></i>Loved the wine opener! So
+                                                        easy to use and
                                                         the design is just perfect! Highly recommended<i
                                                             class="padd_leftt0"><img
-                                                                src="{{asset('assets/images/te2.png')}}" alt="#" /></i>
+                                                                src="{{asset('assets/images/te2.png')}}" alt="#"
+                                                                class="testemonial_img" /></i>
                                                     </p>
                                                 </div>
                                             </div>
@@ -171,11 +175,12 @@
                                                 <div class="test_box">
                                                     <h3>Nour Sayyed</h3>
                                                     <p><i class="padd_rightt0"><img
-                                                                src="{{asset('assets/images/te1.png')}}" alt="#" /></i>
+                                                                src="{{asset('assets/images/te1.png')}}" alt="#"
+                                                                class="testemonial_img" /></i>
                                                         ماشاء الله منتجات جميله جداااااااااااااا 🌹🌹
                                                         <i class="padd_leftt0"><img
-                                                                src="{{asset('assets/images/te2.png')}}"
-                                                                alt="#" /></i><br>
+                                                                src="{{asset('assets/images/te2.png')}}" alt="#"
+                                                                class="testemonial_img" /></i><br>
                                                         والمعامله فوق الممتاز واسعاركوا كويسه جدا مقارنه بالمحلات بجد
                                                         ربنا يوفقكوا ودايما من نجاح لنجاح ❤️❤️
 

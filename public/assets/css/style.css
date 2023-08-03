@@ -321,11 +321,11 @@ button {
 }
 
 .logo a {
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bold;
   text-transform: uppercase;
   color: #fff;
-  line-height: 40px;
+  line-height: 35px;
 }
 
 .text-bg {
@@ -339,30 +339,30 @@ button {
 
 .text-bg h1 {
   color: #2d2c2c;
-  font-size: 50px;
-  line-height: 70px;
+  font-size: 40px;
+  line-height: 50px;
   padding-bottom: 10px;
   font-weight: bold;
 }
 
 .text-bg strong {
-  font-size: 27px;
-  line-height: 35px;
+  font-size: 25px;
+  line-height: 30px;
   color: #2d2c2c;
 }
 
 .text-bg span {
   font-family: "Baloo Chettan", cursive;
-  color: #2bcc91;
-  font-size: 40px;
-  line-height: 77px;
+  color: #46a3a6;
+  font-size: 30px;
+  line-height: 50px;
   font-weight: bold;
   padding-bottom: 20px;
   display: block;
 }
 
 .text-bg a {
-  font-size: 17px;
+  font-size: 15px;
   background-color: #2d2c2c;
   color: #fff;
   padding: 13px 0px;
@@ -375,7 +375,7 @@ button {
 }
 
 .text-bg a:hover {
-  background-color: #2bcc91;
+  background-color: #46a3a6;
   color: #fff;
   transition: ease-in all 0.5s;
   border-radius: 26px;
@@ -383,7 +383,7 @@ button {
 
 .text-img {
   height: 750px;
-  background: linear-gradient(to bottom, #0aec98 0%, #2bcc91 100%);
+  background: linear-gradient(to bottom, #0aec98 0%, #46a3a6 100%);
   border-radius: 322px 0px 0px 380px;
   padding: 132px 20px 0px 50px;
 }
@@ -412,7 +412,7 @@ button {
   color: #fff;
   padding: 7px 12px;
   font-size: 21px;
-  border: #2bcc91 solid 7px;
+  border: #46a3a6 solid 7px;
 }
 
 .padding_right1 {
@@ -425,9 +425,9 @@ button {
 }
 
 .titlepage h2 {
-  font-size: 50px;
+  font-size: 30px;
   color: #3e3e3e;
-  line-height: 50px;
+  line-height: 30px;
   font-weight: bold;
   padding: 0;
 }
@@ -448,12 +448,12 @@ button {
 
 .about .titlepage h2 {
   margin-bottom: 20px;
-  color: #2bcc91;
+  color: #46a3a6;
 }
 
 .about .titlepage span {
   color: #fff;
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .about .about_box {
@@ -469,7 +469,7 @@ button {
 }
 
 .about .about_box .read_more {
-  background: #2bcc91;
+  background: #46a3a6;
   color: black;
   border-radius: 15px;
 }
@@ -489,13 +489,13 @@ button {
 
 .best .titlepage span {
   color: #23262d;
-  font-size: 17px;
-  line-height: 28px;
+  font-size: 15px;
+  line-height: 20px;
 }
 
 .best_box {
   text-align: center;
-  background-color: #2bcc91;
+  background-color: #46a3a6;
   border-radius: 20px;
   padding: 30px 20px;
   margin-bottom: 30px;
@@ -504,7 +504,7 @@ button {
 .best_box h4 {
   color: #fff;
   text-transform: uppercase;
-  font-size: 30px;
+  font-size: 20px;
   line-height: 40px;
   font-weight: 500;
   padding: 0;
@@ -512,8 +512,8 @@ button {
 
 .best_box p {
   color: #fff;
-  font-size: 17px;
-  line-height: 28px;
+  font-size: 15px;
+  line-height: 20px;
   padding-top: 25px;
 }
 
@@ -527,7 +527,7 @@ button {
 }
 
 .best .read_more:hover {
-  background-color: #2bcc91;
+  background-color: #46a3a6;
 }
 
 /** end best section **/
@@ -601,7 +601,7 @@ button {
 }
 
 .request .main_form .send_btn:hover {
-  background-color: #2bcc91;
+  background-color: #46a3a6;
   transition: ease-in all 0.5s;
   color: #fff;
   border-radius: 26px;
@@ -644,7 +644,7 @@ button {
 /** two_box section section **/
 
 .two_box {
-  background: #2bcc91;
+  background: #46a3a6;
   margin-top: 90px;
   padding: 0 40px;
 }
@@ -711,7 +711,7 @@ button {
 
 .testimonial_Carousel .test_box h3 {
   font-size: 30px;
-  color: #2bcc91;
+  color: #46a3a6;
   line-height: 32px;
   display: inline-block;
   padding-bottom: 40px;
@@ -731,7 +731,7 @@ button {
 .testimonial_Carousel .carousel-indicators li {
   width: 15px;
   height: 13px;
-  background: #41c365;
+  background: #46a3a6;
 }
 
 .testimonial_Carousel .carousel-indicators li.active {
@@ -748,14 +748,12 @@ button {
 /** footer **/
 
 .multi {
-  color: #2bcc91;
+  color: #46a3a6;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .footer {
-  border-top: #000 solid 1px;
-  font-family: Poppins;
   background: #fff;
   padding-top: 50px;
 }
@@ -766,15 +764,15 @@ button {
 
 .cont h3 {
   color: #0c0c0e;
-  font-size: 37px;
-  line-height: 55px;
+  font-size: 20px;
+  line-height: 30px;
   font-weight: bold;
 }
 
 .cont_call h3 {
   color: #0c0c0e;
-  font-size: 50px;
-  line-height: 60px;
+  font-size: 20px;
+  line-height: 30px;
   font-weight: bold;
 }
 
@@ -796,7 +794,7 @@ button {
 }
 
 .copyright a:hover {
-  color: #2bcc91;
+  color: #46a3a6;
 }
 
 /** end footer **/

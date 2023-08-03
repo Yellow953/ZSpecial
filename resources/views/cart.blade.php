@@ -64,7 +64,7 @@
 
 {{-- Cart --}}
 <main id="cart" style="max-width:960px">
-    <h1>Your Cart</h1>
+    <h1 class="custom-font">Your Cart</h1>
     <div class="container-fluid">
 
         <div class="row align-items-start">
