@@ -117,6 +117,19 @@
                             {{ csrf_field() }}
                             {{ method_field('post') }}
 
+                            <div class="row my-4">
+                                <div class="col-3">
+                                    <label for="user_id" class="mt-1">User</label>
+                                </div>
+                                <div class="col-9">
+                                    <select name="user_id" id="user_id" required class="form-control">
+                                        @foreach ($users as $user)
+                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                             <table class="table table-hover">
                                 <thead>
                                     <tr>

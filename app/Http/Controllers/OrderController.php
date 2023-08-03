@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Log;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -25,7 +26,9 @@ class OrderController extends Controller
     {
         $categories = Category::with('products')->get();
         $orders = Order::paginate(5);
-        $data = compact('categories', 'orders');
+        $users = User::all();
+
+        $data = compact('categories', 'orders', 'users');
         return view('orders.new', $data);
 
     } //end of new
@@ -54,7 +57,9 @@ class OrderController extends Controller
         $order = Order::find($id);
         $categories = Category::with('products')->get();
         $orders = Order::paginate(5);
-        $data = compact('categories', 'orders', 'order');
+        $users = User::all();
+
+        $data = compact('categories', 'orders', 'order', 'users');
         return view('orders.edit', $data);
 
     } //end of edit
@@ -84,7 +89,8 @@ class OrderController extends Controller
 
     private function attach_order($request)
     {
-        $order = auth()->user()->orders()->create([]);
+        $user = User::find($request->user_id);
+        $order = $user->orders()->create([]);
 
         $order->products()->attach($request->products);
 

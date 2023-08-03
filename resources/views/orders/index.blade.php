@@ -27,7 +27,7 @@
                             </thead>
                             <tbody>
                                 @forelse( $orders as $order )
-                                <tr>
+                                <tr class="{{($order->status == 'completed') ? 'bg-light' : ''}}">
                                     <td>
                                         {{$order->id }} <br>
                                     </td>
@@ -51,6 +51,10 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-center">
+                                            @if ($order->status != 'completed')
+                                            <a href="/order/{{$order->id}}/complete"
+                                                class="btn btn-success btn-rounded m-1">Complete</a>
+                                            @endif
                                             <a href="/order/{{$order->id}}/show"
                                                 class="btn btn-primary btn-rounded m-1">Show</a>
                                             @if (Auth::user()->role == "admin")
