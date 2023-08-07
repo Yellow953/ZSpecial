@@ -2,7 +2,6 @@
 
 @section('content')
 <link rel="stylesheet" href="{{asset('assets/css/shop.css')}}">
-
 <div class="header">
     <div class="container">
         <div class="row">
@@ -61,16 +60,14 @@
 
 <br><br><br><br><br>
 
-<h3 class="heading custom-font">ZSpecial's Products</h3>
-
 <div class="container d-flex justify-content-center">
     <div class="custom_header_bg" style="width:fit-content;">
-        <ul class="mx-auto d-flex justify-content-center">
-            <li><a class="nav-link text-dark {{(request()->query('search') == null) ? 'cat-active' : '' }}"
-                    href="/shop">All</a></li>
+        <ul class="mx-auto d-flex justify-content-center" style="max-width: 80vw; overflow-x:auto;">
+            <li><a class="nav-link text-dark {{(request()->query('search') == null) ? 'cat-active' : '' }}" href="/shop"
+                    style="font-size: 17px;">All</a></li>
             @foreach ($categories as $category)
             <li><a class="nav-link text-dark {{(Str::contains(request()->query('search'), $category->id)) ? 'cat-active' : '' }}"
-                    href="/shop?search={{$category->id}}">{{ucfirst($category->name)}}</a>
+                    href="/shop?search={{$category->id}}" style="font-size: 17px;">{{ucfirst($category->name)}}</a>
             </li>
             @endforeach
         </ul>
@@ -102,17 +99,16 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h2 class="custom-font">{{ucwords($product->name)}}</h2>
-
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body py-0 px-4">
+                                        <h2 class="custom-font my-4 text-center">{{ucwords($product->name)}}</h2>
 
                                         <img src="{{$product->image}}" class="img-modal">
 
-                                        <p class="text-right text-success mx-4">
+                                        <p class="text-center text-success mx-4 my-2">
                                             Price : {{number_format($product->sell_price, 2)}}$
                                         </p>
 

@@ -27,7 +27,7 @@
                     value="{{$promo->valid_untill}}">
             </div>
             <div class="w-100 d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary btn-rounded">Create</button>
+                <button type="submit" class="btn btn-primary btn-rounded">Update</button>
             </div>
         </form>
     </div>

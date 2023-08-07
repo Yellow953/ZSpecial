@@ -58,9 +58,14 @@
                 <div class="row d_flex">
                     <div class="col-md-5">
                         <div class="text-bg">
-                            <h1 class="custom-font">A Destination for the Extraordinary</h1>
-                            <span class="custom-font">Shop safely with us </span>
-                            <a href="/shop">Discover Products</a>
+                            <h1 class="custom-font text-center text-md-left">A Destination for the Extraordinary</h1>
+                            <span class="custom-font text-center text-md-left" style="font-size: 25px!important">Shop
+                                safely with
+                                us
+                            </span>
+                            <div class="w-100 text-center text-md-left">
+                                <a href="/shop">Discover Products</a>
+                            </div>
                         </div>
                     </div>
                     <div class="d-none d-md-block col-md-7 padding_right1">

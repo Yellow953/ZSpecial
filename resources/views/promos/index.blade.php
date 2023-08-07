@@ -20,6 +20,7 @@
                                 <tr>
                                     <th>Promo</th>
                                     <th>Value</th>
+                                    <th>Valid Untill</th>
                                     @if (Auth::user()->role == "admin")
                                     <th>Action</th>
                                     @endif
@@ -33,6 +34,9 @@
                                     </td>
                                     <td>
                                         {{$promo->value }} <br>
+                                    </td>
+                                    <td>
+                                        {{$promo->valid_untill}}
                                     </td>
                                     @if (Auth::user()->role == "admin")
                                     <td>

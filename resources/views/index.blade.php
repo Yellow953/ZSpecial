@@ -70,8 +70,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="titlepage">
-                        <h2 class="custom-font">Shop With ZSpecial</h2>
-                        <span>A Destination for the Extraordinary</span>
+                        <h2 class="custom-font">Why Choose Us?</h2>
                     </div>
                 </div>
             </div>
