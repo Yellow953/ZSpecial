@@ -10,7 +10,7 @@ class PromoController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('admin')->except('check');
     }
 
     public function index()
@@ -74,5 +74,19 @@ class PromoController extends Controller
         $promo->delete();
         Log::create(['text' => $text]);
         return redirect('/promos')->with('danger', 'Promo was successfully deleted');
+    }
+
+    public function check(Request $request)
+    {
+
+        $promoName = $request->promo;
+
+        $promo = Promo::where('name', 'LIKE', $promoName)->first();
+
+        if ($promo) {
+            return response()->json(['exists' => true, 'value' => $promo->value]);
+        }
+
+        return response()->json(['exists' => false]);
     }
 }

@@ -58,6 +58,10 @@ class HomeController extends Controller
 
         $cart_items = Cart::where('user_id', auth()->user()->id)->get();
 
+        if ($cart_items->count() == 0) {
+            return redirect()->back()->with('danger', 'Cart empty...');
+        }
+
         if ($request->promo != null) {
             $promo = Promo::where('name', 'LIKE', $request->promo)->get()->first();
             $discount = $promo->value;

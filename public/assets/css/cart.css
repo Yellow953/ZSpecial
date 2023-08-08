@@ -114,7 +114,7 @@ h4 {
 .shopnow:hover {
   text-decoration: none;
   color: white;
-  background-color: #c41505;
+  background-color: #46a3a6;
 }
 /* for button animation*/
 .shopnow span {
@@ -163,4 +163,25 @@ h4 {
   width: 125px;
   height: 125px;
   margin: 0;
+}
+
+.border-b-0 {
+  border-bottom: none;
+}
+
+.size-1 {
+  font-size: 20px;
+}
+.size-2 {
+  font-size: 12px;
+}
+
+#promo {
+  background: white;
+  border-radius: 5px;
+  border: lightgray 1px solid;
+}
+
+.w-90 {
+  width: 88%;
 }

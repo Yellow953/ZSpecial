@@ -80,6 +80,7 @@ Route::get('/cart/{id}/destroy', [App\Http\Controllers\CartController::class, 'd
 Route::get('/carts', [App\Http\Controllers\CartController::class, 'index']);
 
 // Promo
+Route::post('/check_promo', [App\Http\Controllers\PromoController::class, 'check'])->name('check_promo');
 Route::get('/promo/{id}/edit', [App\Http\Controllers\PromoController::class, 'edit']);
 Route::post('/promo/{id}/update', [App\Http\Controllers\PromoController::class, 'update']);
 Route::get('/promo/{id}/destroy', [App\Http\Controllers\PromoController::class, 'destroy']);

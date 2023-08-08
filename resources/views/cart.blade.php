@@ -104,28 +104,32 @@
                 <form action="/order/checkout" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row m-0">
-                        <div class="col-sm-8 p-0">
-                            <h6>Subtotal</h6>
+                        <div class="col-8 p-0 my-auto">
+                            <h3 class="border-b-0 custom-font size-1">Subtotal</h3>
                         </div>
-                        <div class="col-sm-4 p-0">
-                            <p id="subtotal">${{number_format($sub_total, 2)}}</p>
+                        <div class="col-4 p-0 my-auto">
+                            $<span id="subtotal">{{number_format($sub_total, 2)}}</span>
                         </div>
                     </div>
                     <div class="row m-0">
-                        <div class="col-sm-8 p-0 ">
-                            <h6>Promo</h6>
+                        <div class="col-8 p-0 my-auto">
+                            <h3 class="border-b-0 custom-font size-1">Promo</h3>
                         </div>
-                        <div class="col-sm-4 p-0">
-                            <input type="text" name="promo" id="promo" placeholder="Promo" style="width: 100px;">
+                        <div class="col-4 p-0 my-auto">
+                            <input type="text" name="promo" id="promo" style="width: 75px;">
+                            <span id="promoValue"></span>
                         </div>
+                    </div>
+                    <div class="w-90 d-flex justify-content-end">
+                        <a id="apply" class="text-primary size-2">Apply</a>
                     </div>
                     <hr>
                     <div class="row mx-0 mb-2">
-                        <div class="col-sm-8 p-0 d-inline">
-                            <h5>Total</h5>
+                        <div class="col-8 p-0 my-auto">
+                            <h3 class="border-b-0 custom-font size-1">Total</h3>
                         </div>
-                        <div class="col-sm-4 p-0">
-                            <p id="total">${{number_format($total, 2)}}</p>
+                        <div class="col-4 p-0 my-auto">
+                            $<span id="total">{{number_format($total, 2)}}</span>
                         </div>
                     </div>
 
@@ -142,4 +146,45 @@
 
 @include('layouts._footer')
 
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#apply').click(function () {
+            const promoCode = $('#promo').val();
+            
+            $.ajax({
+                method: 'POST',
+                url: '{{ route("check_promo") }}',
+                data: { promo: promoCode,_token: '{{ csrf_token() }}' },
+                success: function (response) {
+                    if (response.exists) {
+                        let promoValue = response.value;
+                        const subtotal = parseFloat($('#subtotal').text());
+                        const total = calculateNewTotal(subtotal, promoValue);
+
+                        $('#promo').hide();
+                        $('#apply').hide();
+                        $('.promo-value').show();
+                        promoValue *= 100 ;
+                        $('#promoValue').text(promoValue.toString() + "%");
+                        
+                        $('#total').text(total);
+                    } else {
+                        alert('Invalid promo code.');
+                    }
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        });
+
+        function calculateNewTotal(subtotal, promoValue) {
+            // Apply the promo value to the total
+            const newTotal = subtotal - (subtotal * promoValue);
+            return newTotal.toFixed(2); // Round to 2 decimal places
+        }
+    });
+</script>
 @endsection
