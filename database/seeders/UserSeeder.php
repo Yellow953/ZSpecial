@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'phone' => '70285659',
             'address' => 'test address',
             'password' => Hash::make('qwe123'),
+            'email_verified_at' => Carbon::now(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);

@@ -12,8 +12,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('admin')->except(['EditPassword', 'UpdatePassword', 'edit', 'update']);
+        $this->middleware(['admin', 'verified'])->except(['EditPassword', 'UpdatePassword', 'edit', 'update']);
     }
 
     public function index()

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/user/edit', [App\Http\Controllers\UserController::class, 'edit']);
 Route::post('/user/update', [App\Http\Controllers\UserController::class, 'update']);

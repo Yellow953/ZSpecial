@@ -10,7 +10,7 @@ class PromoController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin')->except('check');
+        $this->middleware(['admin', 'verified'])->except('check');
     }
 
     public function index()
