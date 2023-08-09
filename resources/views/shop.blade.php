@@ -87,8 +87,8 @@
                     <h5 class="text-center custom-font">{{ucfirst($product->name)}}</h5>
 
                     <div class="text-center">
-                        <button type="button" class="btn btn-primary mt-4 px-4 py-2 rounded-20" data-toggle="modal"
-                            data-target="#exampleModal{{$product->id}}">
+                        <button type="button" class="btn text-white mt-4 px-4 py-2 rounded-20" data-toggle="modal"
+                            data-target="#exampleModal{{$product->id}}" style="background: #2d2c2c;">
                             View
                         </button>
                     </div>
