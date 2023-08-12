@@ -89,6 +89,15 @@ Route::get('/promo/new', [App\Http\Controllers\PromoController::class, 'new']);
 Route::post('/promo/create', [App\Http\Controllers\PromoController::class, 'create']);
 Route::get('/promos', [App\Http\Controllers\PromoController::class, 'index']);
 
+// Variables
+Route::get('/variable/new', [App\Http\Controllers\VariableController::class, 'new']);
+Route::post('/variable/create', [App\Http\Controllers\VariableController::class, 'create']);
+Route::get('/variable/{id}/edit', [App\Http\Controllers\VariableController::class, 'edit']);
+Route::post('/variable/{id}/update', [App\Http\Controllers\VariableController::class, 'update']);
+Route::post('/variable/{id}/save', [App\Http\Controllers\VariableController::class, 'save']);
+Route::get('/variable/{id}/destroy', [App\Http\Controllers\VariableController::class, 'destroy']);
+Route::get('/variables', [App\Http\Controllers\VariableController::class, 'index']);
+
 // Social Media
 Route::post('/sm_post', [App\Http\Controllers\SocialMediaController::class, 'sm_post']);
 Route::get('/social_media', [App\Http\Controllers\SocialMediaController::class, 'index']);

@@ -7,7 +7,7 @@
     @include('layouts._header')
 
     <section id="bundles" class="w-100">
-        <h1 class="mt-5 mb-3 text-center custom-font">Bundles</h1>
+        <h1 class="mt-5 mb-3 text-center custom-font">{{Helper::get_title()}}</h1>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 @foreach ($bundles->chunk(3) as $key => $bundleSet)

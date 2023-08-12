@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Cart;
 use App\Models\DollarRate;
+use App\Models\Variable;
 
 class Helper
 {
@@ -34,6 +35,17 @@ class Helper
             return Cart::where('user_id', auth()->user()->id)->get()->count();
         } else {
             return 0;
+        }
+    }
+
+    public static function get_title()
+    {
+        $title = Variable::where('type', 'Bundle Title')->first();
+
+        if ($title != null) {
+            return $title->value;
+        } else {
+            return "Bundles";
         }
     }
 
