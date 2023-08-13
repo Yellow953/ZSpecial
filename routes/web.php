@@ -107,5 +107,11 @@ Route::get('/shop', [App\Http\Controllers\HomeController::class, 'shop'])->name(
 // Cart
 Route::get('/cart', [App\Http\Controllers\HomeController::class, 'cart'])->name('cart');
 
+// Download
+Route::get('/download/refund_policy', [App\Http\Controllers\HomeController::class, 'download_refund_policy']);
+Route::get('/download/shipping_policy', [App\Http\Controllers\HomeController::class, 'download_shipping_policy']);
+Route::get('/download/privacy_policy', [App\Http\Controllers\HomeController::class, 'download_privacy_policy']);
+Route::get('/download/terms_of_service', [App\Http\Controllers\HomeController::class, 'download_terms_of_service']);
+
 // Home
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

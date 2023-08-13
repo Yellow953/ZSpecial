@@ -22,8 +22,10 @@
                     value="{{$variable->value}}">
             </div>
             <div class="form-group">
-                <label for="type" class="col-form-label">Valid Untill</label>
-                <input class="form-control input-rounded" name="type" type="text" required value="{{$variable->type}}">
+                <label for="type" class="col-form-label">Type*</label>
+                <select class="form-control input-rounded" name="type" required>
+                    <option value="Bundle Title" selected>Bundle Title</option>
+                </select>
             </div>
             <div class="w-100 d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary btn-rounded">Update</button>

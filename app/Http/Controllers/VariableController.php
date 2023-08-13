@@ -37,18 +37,6 @@ class VariableController extends Controller
         $variable->type = $request->type;
         $variable->value = $request->value;
 
-
-
-        // if ($request->hasFile('image')) {
-        //     $file = $request->file('image');
-        //     $ext = $file->getClientOriginalExtension();
-        //     $filename = time() . '.' . $ext;
-        //     $file->move('uploads/variables/', $filename);
-        //     $variable->image = '/uploads/variables/' . $filename;
-        // } else {
-        //     $variable->image = "/assets/images/no_img.png";
-        // }
-
         $text = "Variable " . $request->title . " created, datetime: " . now();
         Log::create(['text' => $text]);
 

@@ -7,12 +7,13 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Promo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'verified'])->except('index');
+        $this->middleware(['auth', 'verified'])->only('shop', 'cart', 'checkout');
     }
 
     public function index()
@@ -95,6 +96,66 @@ class HomeController extends Controller
         }
 
         return redirect()->back()->with('success', 'Order submitted, thank you for choosing us!');
+    }
+
+    public function download_refund_policy()
+    {
+        $filename = "refund_policy.pdf";
+        $publicPath = public_path();
+
+        $filePath = $publicPath . '/assets/pdf/' . $filename;
+
+        if (file_exists($filePath)) {
+            $mime = mime_content_type($filePath);
+            return response()->download($filePath, $filename, ['Content-Type' => $mime]);
+        } else {
+            return response()->json(['error' => 'File not found.'], 404);
+        }
+    }
+
+    public function download_shipping_policy()
+    {
+        $filename = "shipping_policy.pdf";
+        $publicPath = public_path();
+
+        $filePath = $publicPath . '/assets/pdf/' . $filename;
+
+        if (file_exists($filePath)) {
+            $mime = mime_content_type($filePath);
+            return response()->download($filePath, $filename, ['Content-Type' => $mime]);
+        } else {
+            return response()->json(['error' => 'File not found.'], 404);
+        }
+    }
+
+    public function download_privacy_policy()
+    {
+        $filename = "privacy_policy.pdf";
+        $publicPath = public_path();
+
+        $filePath = $publicPath . '/assets/pdf/' . $filename;
+
+        if (file_exists($filePath)) {
+            $mime = mime_content_type($filePath);
+            return response()->download($filePath, $filename, ['Content-Type' => $mime]);
+        } else {
+            return response()->json(['error' => 'File not found.'], 404);
+        }
+    }
+
+    public function download_terms_of_service()
+    {
+        $filename = "terms_of_service.pdf";
+        $publicPath = public_path();
+
+        $filePath = $publicPath . '/assets/pdf/' . $filename;
+
+        if (file_exists($filePath)) {
+            $mime = mime_content_type($filePath);
+            return response()->download($filePath, $filename, ['Content-Type' => $mime]);
+        } else {
+            return response()->json(['error' => 'File not found.'], 404);
+        }
     }
 
 }

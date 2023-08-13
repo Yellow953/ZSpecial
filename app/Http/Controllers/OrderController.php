@@ -144,19 +144,12 @@ class OrderController extends Controller
     public function destroy($id)
     {
         $order = Order::find($id);
-        foreach ($order->products as $product) {
-
-            $product->update([
-                'quantity' => $product->quantity + $product->pivot->quantity
-            ]);
-
-        } //end of for each
 
         $text = $order->user->name . " deleted order " . $order->id . ", datetime: " . now();
         Log::create(['text' => $text]);
 
         $order->delete();
-        session()->flash('success', "Order successfully deleted and returned all items!");
+        session()->flash('success', "Order successfully deleted!");
         return redirect('/orders');
 
     } //end of order
