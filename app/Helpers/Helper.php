@@ -13,7 +13,7 @@ class Helper
         if (DollarRate::count() == 0) {
             return DollarRate::create(['lbp' => 90000]);
         } else {
-            return DollarRate::firstOrFail();
+            return DollarRate::first();
         }
     }
 
@@ -23,7 +23,7 @@ class Helper
         if (DollarRate::count() == 0) {
             $dollar_rate = DollarRate::create(['lbp' => 100000]);
         } else {
-            $dollar_rate = DollarRate::firstOrFail();
+            $dollar_rate = DollarRate::first();
         }
         return $price * $dollar_rate->lbp;
     }
@@ -39,7 +39,7 @@ class Helper
 
     public static function get_title()
     {
-        $title = Variable::where('type', 'Bundle Title')->firstOrFail();
+        $title = Variable::where('type', 'Bundle Title')->first();
 
         if ($title != null) {
             return $title->value;
