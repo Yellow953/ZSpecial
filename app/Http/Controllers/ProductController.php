@@ -74,7 +74,7 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         $categories = Category::all();
         $data = compact('categories', 'product');
         return view('products.edit', $data);
@@ -86,7 +86,7 @@ class ProductController extends Controller
             return redirect()->back()->with('danger', 'Negative Values...');
         }
 
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         $product->name = $request->name;
         $product->buy_price = $request->buy_price;
         $product->sell_price = $request->sell_price;
@@ -110,7 +110,7 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         $text = "Product " . $product->name . " deleted, datetime: " . now();
 
         if ($product->image != '/assets/images/no_img.png') {
@@ -125,7 +125,7 @@ class ProductController extends Controller
 
     public function import($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         return view('products.import', compact('product'));
     }
 
@@ -139,7 +139,7 @@ class ProductController extends Controller
             return redirect()->back()->with('danger', 'Negative Values...');
         }
 
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
 
         $product->quantity += $request->quantity;
 

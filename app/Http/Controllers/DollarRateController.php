@@ -15,13 +15,13 @@ class DollarRateController extends Controller
 
     public function edit()
     {
-        if (DollarRate::all()->count() == 0) {
+        if (DollarRate::count() == 0) {
             $dollar_rate = new DollarRate();
             $dollar_rate->lbp = 1500;
             $dollar_rate->save();
         }
 
-        $dollar_rate = DollarRate::first();
+        $dollar_rate = DollarRate::firstOrFail();
         return view('dollar_rates.edit', compact('dollar_rate'));
     }
 
@@ -31,7 +31,7 @@ class DollarRateController extends Controller
             return redirect()->back()->with('danger', 'Negative Values...');
         }
 
-        $dollar_rate = DollarRate::first();
+        $dollar_rate = DollarRate::firstOrFail();
         $dollar_rate->lbp = $request->lbp;
         $text = "Dollar Rate changed to " . $dollar_rate->lbp . ", datetime: " . now();
         $dollar_rate->save();
@@ -42,12 +42,12 @@ class DollarRateController extends Controller
 
     public function usage(Request $request)
     {
-        if (DollarRate::all()->count() == 0) {
+        if (DollarRate::count() == 0) {
             $dollar_rate = new DollarRate();
             $dollar_rate->lbp = 1500;
             $dollar_rate->save();
         } else {
-            $dollar_rate = DollarRate::first();
+            $dollar_rate = DollarRate::firstOrFail();
         }
 
         if ($dollar_rate->usage == true) {

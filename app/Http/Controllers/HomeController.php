@@ -64,7 +64,7 @@ class HomeController extends Controller
         }
 
         if ($request->promo != null) {
-            $promo = Promo::where('name', 'LIKE', $request->promo)->get()->first();
+            $promo = Promo::where('name', 'LIKE', $request->promo)->firstOrFail();
             $discount = $promo->value;
         }
 

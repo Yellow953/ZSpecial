@@ -74,7 +74,7 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $text = "User " . $user->name . " was deleted, datetime: " . now();
         $user->delete();
         Log::create(['text' => $text]);
@@ -89,7 +89,7 @@ class UserController extends Controller
 
     public function UpdatePassword(Request $request)
     {
-        $user = User::find(Auth()->user()->id);
+        $user = User::findOrFail(Auth()->user()->id);
         if (!Hash::check($request->password, $user->password)) {
             return back()->with("danger", "Old Password Doesn't match!");
         }

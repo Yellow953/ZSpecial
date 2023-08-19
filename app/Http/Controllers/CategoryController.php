@@ -44,13 +44,13 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
         return view('categories.edit', compact('category'));
     }
 
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
         $category->name = $request->name;
         if ($request->description) {
             $category->description = $request->description;
@@ -65,7 +65,7 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
         $text = "Category " . $category->name . " deleted, datetime: " . now();
 
         $category->delete();

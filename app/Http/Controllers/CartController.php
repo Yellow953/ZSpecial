@@ -33,7 +33,7 @@ class CartController extends Controller
 
     public function destroy($id)
     {
-        Cart::find($id)->delete();
+        Cart::findOrFail($id)->delete();
         return redirect('/cart')->with('danger', 'Product successfully removed from cart!');
     }
 }

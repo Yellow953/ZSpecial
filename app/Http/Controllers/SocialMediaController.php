@@ -64,9 +64,9 @@ class SocialMediaController extends Controller
 
         $client = new SMClient();
 
-        $apiKey = '5TH5SAM-DNG4JDP-HWPAYDP-GP68FCS';
-        $facebookPageId = '104373565911628';
-        $instagramBusinessId = '17841457896538891';
+        $apiKey = 'JGWJ4D0-Q4W4HDR-HCQYVED-9NMPFK1';
+        $facebookPageId = '295875061068142';
+        $instagramBusinessId = '17841410952118735';
 
         $postTitle = $request->title;
 
@@ -82,7 +82,7 @@ class SocialMediaController extends Controller
             ],
             'json' => [
                 'post' => $postTitle,
-                'platforms' => ['facebook', 'instagram'],
+                'platforms' => ['facebook', 'instagram', 'tiktok'],
                 'message' => $postTitle,
                 'mediaUrls' => [$imageUrl],
             ],

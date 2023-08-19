@@ -47,7 +47,7 @@ class PromoController extends Controller
 
     public function edit($id)
     {
-        $promo = Promo::find($id);
+        $promo = Promo::findOrFail($id);
         return view('promos.edit', compact('promo'));
     }
 
@@ -57,7 +57,7 @@ class PromoController extends Controller
             return redirect()->back()->with('danger', 'Negative Values...');
         }
 
-        $promo = Promo::find($id);
+        $promo = Promo::findOrFail($id);
         $promo->update(
             $request->all()
         );
@@ -69,7 +69,7 @@ class PromoController extends Controller
 
     public function destroy($id)
     {
-        $promo = Promo::find($id);
+        $promo = Promo::findOrFail($id);
         $text = "Promo " . $promo->name . " deleted, datetime: " . now();
         $promo->delete();
         Log::create(['text' => $text]);
@@ -81,7 +81,7 @@ class PromoController extends Controller
 
         $promoName = $request->promo;
 
-        $promo = Promo::where('name', 'LIKE', $promoName)->first();
+        $promo = Promo::where('name', 'LIKE', $promoName)->firstOrFail();
 
         if ($promo) {
             return response()->json(['exists' => true, 'value' => $promo->value]);

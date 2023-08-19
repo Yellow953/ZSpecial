@@ -54,7 +54,7 @@ class OrderController extends Controller
 
     public function edit($id)
     {
-        $order = Order::find($id);
+        $order = Order::findOrFail($id);
         $categories = Category::with('products')->get();
         $orders = Order::paginate(5);
         $users = User::all();
@@ -70,7 +70,7 @@ class OrderController extends Controller
             'products' => 'required|array',
         ]);
 
-        $order = Order::find($id);
+        $order = Order::findOrFail($id);
 
         $this->detach_order($order);
 
@@ -89,7 +89,7 @@ class OrderController extends Controller
 
     private function attach_order($request)
     {
-        $user = User::find($request->user_id);
+        $user = User::findOrFail($request->user_id);
         $order = $user->orders()->create([]);
 
         $order->products()->attach($request->products);
@@ -137,13 +137,13 @@ class OrderController extends Controller
 
     public function show($id)
     {
-        $order = Order::find($id);
+        $order = Order::findOrFail($id);
         return view('orders.show', compact('order'));
     }
 
     public function destroy($id)
     {
-        $order = Order::find($id);
+        $order = Order::findOrFail($id);
 
         $text = $order->user->name . " deleted order " . $order->id . ", datetime: " . now();
         Log::create(['text' => $text]);
@@ -156,7 +156,7 @@ class OrderController extends Controller
 
     public function complete($id)
     {
-        $order = Order::find($id);
+        $order = Order::findOrFail($id);
         $order->update([
             'status' => 'completed'
         ]);

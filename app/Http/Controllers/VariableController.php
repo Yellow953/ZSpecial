@@ -46,7 +46,7 @@ class VariableController extends Controller
 
     public function edit($id)
     {
-        $variable = Variable::find($id);
+        $variable = Variable::findOrFail($id);
         $data = compact('variable');
         return view('variables.edit', $data);
     }
@@ -59,7 +59,7 @@ class VariableController extends Controller
             'type' => 'required',
         ]);
 
-        $variable = Variable::find($id);
+        $variable = Variable::findOrFail($id);
         $variable->title = $request->title;
         $variable->type = $request->type;
         $variable->value = $request->value;
@@ -80,7 +80,7 @@ class VariableController extends Controller
 
     public function destroy($id)
     {
-        $variable = Variable::find($id);
+        $variable = Variable::findOrFail($id);
         $text = "Variable " . $variable->name . " deleted, datetime: " . now();
 
         // if ($variable->image != '/assets/images/no_img.png') {
