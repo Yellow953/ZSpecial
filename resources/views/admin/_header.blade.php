@@ -40,18 +40,13 @@
                 <h4 class="user-name dropdown-toggle text-dark" data-toggle="dropdown">{{ ucwords(Auth::user()->name)
                     }}<i class="fa fa-angle-down"></i></h4>
                 <div class="dropdown-menu">
-                    <a href="/user/edit" class="dropdown-item">{{ ucfirst(Auth::user()->name) }}
+                    <a href="/profile" class="dropdown-item">{{ ucfirst(Auth::user()->name) }}
                         ({{ucfirst(Auth::user()->role)}})</a>
                     <a class="dropdown-item" href="/password/edit">Change Password</a>
                     <a class="dropdown-item" href="/dollar_rate/edit">Change Dollar Rate</a>
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();document.getElementById('logout-form').submit();"> {{
+                    <a class="dropdown-item" href="/logout"> {{
                         __('Logout') }}
                     </a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
                 </div>
             </div>
         </div>

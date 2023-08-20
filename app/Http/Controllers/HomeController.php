@@ -7,18 +7,88 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Promo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'verified'])->only('shop', 'cart', 'checkout');
+        $this->middleware(['auth', 'verified'])->except('index', 'download_terms_of_service', 'download_privacy_policy', 'download_shipping_policy', 'download_refund_policy');
     }
 
     public function index()
     {
         $bundles = Product::where('is_bundle', true)->get();
         return view('index', compact('bundles'));
+    }
+
+    public function download_refund_policy()
+    {
+        $filename = "refund_policy.pdf";
+        $publicPath = public_path();
+
+        $filePath = $publicPath . '/assets/pdf/' . $filename;
+
+        if (file_exists($filePath)) {
+            $mime = mime_content_type($filePath);
+            return response()->download($filePath, $filename, ['Content-Type' => $mime]);
+        } else {
+            return response()->json(['error' => 'File not found.'], 404);
+        }
+    }
+
+    public function download_shipping_policy()
+    {
+        $filename = "shipping_policy.pdf";
+        $publicPath = public_path();
+
+        $filePath = $publicPath . '/assets/pdf/' . $filename;
+
+        if (file_exists($filePath)) {
+            $mime = mime_content_type($filePath);
+            return response()->download($filePath, $filename, ['Content-Type' => $mime]);
+        } else {
+            return response()->json(['error' => 'File not found.'], 404);
+        }
+    }
+
+    public function download_privacy_policy()
+    {
+        $filename = "privacy_policy.pdf";
+        $publicPath = public_path();
+
+        $filePath = $publicPath . '/assets/pdf/' . $filename;
+
+        if (file_exists($filePath)) {
+            $mime = mime_content_type($filePath);
+            return response()->download($filePath, $filename, ['Content-Type' => $mime]);
+        } else {
+            return response()->json(['error' => 'File not found.'], 404);
+        }
+    }
+
+    public function download_terms_of_service()
+    {
+        $filename = "terms_of_service.pdf";
+        $publicPath = public_path();
+
+        $filePath = $publicPath . '/assets/pdf/' . $filename;
+
+        if (file_exists($filePath)) {
+            $mime = mime_content_type($filePath);
+            return response()->download($filePath, $filename, ['Content-Type' => $mime]);
+        } else {
+            return response()->json(['error' => 'File not found.'], 404);
+        }
+    }
+
+    public function custom_logout()
+    {
+        Session::flush();
+        Auth::logout();
+        return redirect('/');
     }
 
     public function shop()
@@ -97,63 +167,40 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'Order submitted, thank you for choosing us!');
     }
 
-    public function download_refund_policy()
+    public function profile()
     {
-        $filename = "refund_policy.pdf";
-        $publicPath = public_path();
-
-        $filePath = $publicPath . '/assets/pdf/' . $filename;
-
-        if (file_exists($filePath)) {
-            $mime = mime_content_type($filePath);
-            return response()->download($filePath, $filename, ['Content-Type' => $mime]);
-        } else {
-            return response()->json(['error' => 'File not found.'], 404);
-        }
+        return view('profile');
     }
 
-    public function download_shipping_policy()
+    public function save_profile(Request $request)
     {
-        $filename = "shipping_policy.pdf";
-        $publicPath = public_path();
+        $user = Auth()->user();
 
-        $filePath = $publicPath . '/assets/pdf/' . $filename;
+        $user->update(
+            $request->all()
+        );
 
-        if (file_exists($filePath)) {
-            $mime = mime_content_type($filePath);
-            return response()->download($filePath, $filename, ['Content-Type' => $mime]);
-        } else {
-            return response()->json(['error' => 'File not found.'], 404);
-        }
+        return redirect()->back()->with('success', 'Profile updated successfully...');
     }
 
-    public function download_privacy_policy()
+    public function EditPassword()
     {
-        $filename = "privacy_policy.pdf";
-        $publicPath = public_path();
-
-        $filePath = $publicPath . '/assets/pdf/' . $filename;
-
-        if (file_exists($filePath)) {
-            $mime = mime_content_type($filePath);
-            return response()->download($filePath, $filename, ['Content-Type' => $mime]);
-        } else {
-            return response()->json(['error' => 'File not found.'], 404);
-        }
+        return view('edit_password');
     }
 
-    public function download_terms_of_service()
+    public function UpdatePassword(Request $request)
     {
-        $filename = "terms_of_service.pdf";
-        $publicPath = public_path();
+        $user = Auth()->user();
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->with("danger", "Old Password Doesn't match!");
+        }
 
-        $filePath = $publicPath . '/assets/pdf/' . $filename;
-
-        if (file_exists($filePath)) {
-            $mime = mime_content_type($filePath);
-            return response()->download($filePath, $filename, ['Content-Type' => $mime]);
+        if ($request->new_password == $request->confirm_password) {
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+            return redirect()->back()->with('success', "Your password has been changed");
         } else {
-            return response()->json(['error' => 'File not found.'], 404);
+            return redirect()->back()->with('danger', "Passwords do not match!");
         }
     }
 

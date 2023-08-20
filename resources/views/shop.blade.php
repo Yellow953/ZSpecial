@@ -31,21 +31,24 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" href="/shop">Shop</a>
                             </li>
+                            @auth
+                            <li class="nav-item">
+                                <a href="/profile" class="nav-link text-dark">
+                                    Profile
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/logout" class="nav-link text-dark">
+                                    Logout
+                                </a>
+                            </li>
+                            @endauth
                         </ul>
+
                         @if(auth()->user())
                         @if (auth()->user()->role == 'admin')
                         <div class="sign_btn"><a href="/app">App</a></div>
                         @else
-                        <li class="nav-item">
-                            <a href="{{ route('logout') }}" class="nav-link text-dark"
-                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                LOGOUT
-                            </a>
-                        </li>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
                         <div class="sign_btn"><a href="/cart">Cart ({{Helper::cart_count()}})</a></div>
                         @endif
                         @else
@@ -62,15 +65,22 @@
 
 <div class="container d-flex justify-content-center">
     <div class="custom_header_bg" style="width:fit-content;">
-        <ul class="mx-auto d-flex justify-content-center" style="max-width: 80vw; overflow-x:auto;">
-            <li><a class="nav-link text-dark {{(request()->query('search') == null) ? 'cat-active' : '' }}" href="/shop"
-                    style="font-size: 17px;">All</a></li>
-            @foreach ($categories as $category)
-            <li><a class="nav-link text-dark {{(Str::contains(request()->query('search'), $category->id)) ? 'cat-active' : '' }}"
-                    href="/shop?search={{$category->id}}" style="font-size: 17px;">{{ucfirst($category->name)}}</a>
-            </li>
-            @endforeach
-        </ul>
+        <div class="d-flex justify-content-center" style="max-width: 80vw; overflow-x:auto;">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link text-dark {{ (request()->query('search') == null) ? 'cat-active' : '' }}"
+                        href="/shop" style="font-size: 17px;">All</a>
+                </li>
+                @foreach ($categories as $category)
+                <li class="nav-item">
+                    <a class="nav-link text-dark {{ (Str::contains(request()->query('search'), $category->id)) ? 'cat-active' : '' }}"
+                        href="/shop?search={{ $category->id }}" style="font-size: 17px;">{{ ucfirst($category->name)
+                        }}</a>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+
     </div>
 </div>
 
@@ -148,7 +158,7 @@
                                         <form action="/cart/create" method="post" enctype="multipart/form-data"
                                             class="w-100 my-2">
                                             @csrf
-                                            <div class="w-100 d-flex justify-content-end">
+                                            <div class="w-100 d-flex justify-content-center">
                                                 <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                                                 <input type="hidden" name="product_id" value="{{$product->id}}">
                                                 <input type="number" name="quantity" id="quantity"

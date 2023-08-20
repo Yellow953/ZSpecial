@@ -59,7 +59,7 @@
                                     </td>
                                     <td>
                                         {{ucfirst($product->category->name)}}<br>
-                                        {{$product->description}}
+                                        {{Str::limit($product->description, 50, '...')}}
                                     </td>
                                     @if (Auth::user()->role == "admin")
                                     <td>

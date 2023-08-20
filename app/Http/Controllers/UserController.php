@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Log;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,7 +11,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['admin', 'verified'])->except(['EditPassword', 'UpdatePassword', 'edit', 'update']);
+        $this->middleware(['admin', 'verified'])->except(['EditPassword', 'UpdatePassword']);
     }
 
     public function index()
@@ -42,6 +41,7 @@ class UserController extends Controller
             $user->phone = $request->phone;
             $user->role = $request->role;
             $user->password = Hash::make($request->password);
+            $user->email_verified_at = now();
 
             $text = "User " . $request->name . " created, datetime: " . now();
             Log::create(['text' => $text]);
@@ -53,18 +53,19 @@ class UserController extends Controller
         }
     }
 
-    public function edit()
+    public function edit($id)
     {
-        $user = Auth::user();
+        $user = User::findOrFail($id);
         return view('users.edit', compact('user'));
     }
 
-    public function update(Request $request)
+    public function update($id, Request $request)
     {
-        $user = Auth::user();
-        $user->email = $request->email;
-        $user->name = $request->name;
+        $user = User::findOrFail($id);
+
         $user->phone = $request->phone;
+        $user->address = $request->address;
+
         $user->save();
 
         $text = "User " . $user->name . " updated, datetime: " . now();
@@ -80,27 +81,4 @@ class UserController extends Controller
         Log::create(['text' => $text]);
         return redirect('/users')->with('danger', "User deleted successfully");
     }
-
-    public function EditPassword()
-    {
-        $user = Auth::user();
-        return view('users.edit_password', compact('user'));
-    }
-
-    public function UpdatePassword(Request $request)
-    {
-        $user = User::findOrFail(Auth()->user()->id);
-        if (!Hash::check($request->password, $user->password)) {
-            return back()->with("danger", "Old Password Doesn't match!");
-        }
-
-        if ($request->new_password == $request->confirm_password) {
-            $user->password = Hash::make($request->new_password);
-            $user->save();
-            return redirect('/users')->with('warning', "Your password has been changed");
-        } else {
-            return redirect()->back()->with('danger', "Passwords do not match!");
-        }
-    }
-
 }

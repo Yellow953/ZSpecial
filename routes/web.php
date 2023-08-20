@@ -5,15 +5,12 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
-Route::get('/user/edit', [App\Http\Controllers\UserController::class, 'edit']);
-Route::post('/user/update', [App\Http\Controllers\UserController::class, 'update']);
+Route::get('/user/{id}/edit', [App\Http\Controllers\UserController::class, 'edit']);
+Route::post('/user/{id}/update', [App\Http\Controllers\UserController::class, 'update']);
 Route::get('/user/{id}/destroy', [App\Http\Controllers\UserController::class, 'destroy']);
 Route::get('/user/new', [App\Http\Controllers\UserController::class, 'new']);
 Route::post('/user/create', [App\Http\Controllers\UserController::class, 'create']);
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index']);
-Route::get('/password/edit', [App\Http\Controllers\UserController::class, 'EditPassword']);
-Route::post('/password/update', [App\Http\Controllers\UserController::class, 'UpdatePassword']);
-
 
 // Admin CRM
 Route::get('/app', [App\Http\Controllers\AdminController::class, 'index']);
@@ -112,6 +109,15 @@ Route::get('/download/refund_policy', [App\Http\Controllers\HomeController::clas
 Route::get('/download/shipping_policy', [App\Http\Controllers\HomeController::class, 'download_shipping_policy']);
 Route::get('/download/privacy_policy', [App\Http\Controllers\HomeController::class, 'download_privacy_policy']);
 Route::get('/download/terms_of_service', [App\Http\Controllers\HomeController::class, 'download_terms_of_service']);
+
+// Profile
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile']);
+Route::post('/profile/save', [App\Http\Controllers\HomeController::class, 'save_profile']);
+Route::get('/password/edit', [App\Http\Controllers\HomeController::class, 'EditPassword']);
+Route::post('/password/update', [App\Http\Controllers\HomeController::class, 'UpdatePassword']);
+
+// logout
+Route::get('/logout', [App\Http\Controllers\HomeController::class, 'custom_logout']);
 
 // Home
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

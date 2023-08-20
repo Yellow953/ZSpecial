@@ -32,7 +32,7 @@
                                         {{ucfirst($category->name)}}
                                     </td>
                                     <td>
-                                        {{$category->description }} <br>
+                                        {{Str::limit($category->description, 50, '...')}} <br>
                                     </td>
                                     @if (Auth::user()->role == "admin")
                                     <td>

@@ -205,6 +205,7 @@ class BackupController extends Controller
             $user->phone = $sheet->getCell('E' . $row)->getValue() ?? '';
             $user->role = $sheet->getCell('D' . $row)->getValue();
             $user->created_at = Carbon::parse($sheet->getCell('F' . $row)->getValue()) ?? Carbon::now();
+            $user->email_verified_at = carbon::now();
             $user->password = Hash::make('qwe123');
             $user->save();
         }

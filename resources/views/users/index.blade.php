@@ -42,6 +42,8 @@
                                     @if (Auth::user()->role == "admin")
                                     <td>
                                         <div class="d-flex justify-content-center">
+                                            <a href="/user/{{$user->id}}/edit"
+                                                class="btn btn-warning btn-rounded m-1">Edit</a>
                                             <form method="GET" action="/user/{{$user->id}}/destroy">
                                                 @csrf
                                                 <button type="submit"

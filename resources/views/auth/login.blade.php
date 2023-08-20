@@ -30,13 +30,13 @@
     <div class="login-area">
         <div class="container">
             <div class="login-box ptb--100">
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('login') }}" class="login-form">
                     @csrf
                     <div class="login-form-head"
-                        style="border-radius: 25px 25px 0 0; border: 1px black solid; border-bottom: none;">
+                        style="border-radius: 25px 25px 0 0; border: 1px black solid; border-bottom: none;0">
                         <h4>Login</h4>
                     </div>
-                    <div class="login-form-body"
+                    <div class="login-form-body bg-white"
                         style="border-radius: 0 0 25px 25px; border: 1px black solid; border-top: none;">
                         <div class="form-gp">
                             <label for="email" class="text-dark">Email Address *</label>
