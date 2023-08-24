@@ -38,6 +38,16 @@
                     </div>
                     <div class="login-form-body bg-white"
                         style="border-radius: 0 0 25px 25px; border: 1px black solid; border-top: none;">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+
                         <div class="form-gp">
                             <label for="name">Name *</label>
                             <input type="text" id="name" name="name" value="{{ old('name') }}" required

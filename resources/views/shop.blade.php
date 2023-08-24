@@ -116,7 +116,34 @@
                                     <div class="modal-body py-0 px-4">
                                         <h2 class="custom-font my-4 text-center">{{ucwords($product->name)}}</h2>
 
-                                        <img src="{{$product->image}}" class="img-modal">
+                                        <!-- Add a carousel container for images -->
+                                        <div id="productImageCarousel{{$product->id}}" class="carousel slide"
+                                            data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item active">
+                                                    <img src="{{asset($product->image)}}" class="img-modal"
+                                                        alt="Main Image">
+                                                </div>
+                                                @foreach ($product->secondary_images as $secondary_image)
+                                                <div class="carousel-item">
+                                                    <img src="{{asset($secondary_image->image)}}" class="img-modal"
+                                                        alt="Secondary Image">
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                            <a class="carousel-control-prev"
+                                                href="#productImageCarousel{{$product->id}}" role="button"
+                                                data-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="carousel-control-next"
+                                                href="#productImageCarousel{{$product->id}}" role="button"
+                                                data-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
 
                                         <p class="text-center text-success mx-4 my-2">
                                             Price : {{number_format($product->sell_price, 2)}}$

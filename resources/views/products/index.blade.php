@@ -64,6 +64,8 @@
                                     @if (Auth::user()->role == "admin")
                                     <td>
                                         <div class="d-flex justify-content-center">
+                                            <a href="/product/{{$product->id}}/secondary_images"
+                                                class="btn btn-secondary btn-rounded m-1">Secondary Images</a>
                                             <a href="/product/{{$product->id}}/import"
                                                 class="btn btn-success btn-rounded m-1">Import</a>
                                             <a href="/product/{{$product->id}}/edit"

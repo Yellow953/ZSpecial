@@ -59,6 +59,10 @@ Route::get('/product/{id}/import', [App\Http\Controllers\ProductController::clas
 Route::post('/product/{id}/save', [App\Http\Controllers\ProductController::class, 'save']);
 Route::get('/product/{id}/destroy', [App\Http\Controllers\ProductController::class, 'destroy']);
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'index']);
+// Secondary Images
+Route::get('/product/{id}/secondary_images', [App\Http\Controllers\ProductController::class, 'secondary_images_index']);
+Route::post('/secondary_image/create', [App\Http\Controllers\ProductController::class, 'secondary_images_create']);
+Route::get('/secondary_image/{id}/destroy', [App\Http\Controllers\ProductController::class, 'secondary_images_destroy']);
 
 // Orders
 Route::get('/order/{id}/complete', [App\Http\Controllers\OrderController::class, 'complete']);

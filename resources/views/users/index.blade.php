@@ -34,7 +34,8 @@
                                     </td>
                                     <td>
                                         {{$user->email }} <br>
-                                        {{$user->phone}}
+                                        {{$user->phone}} <br>
+                                        {{$user->address}}
                                     </td>
                                     <td>
                                         {{ucwords($user->role)}}

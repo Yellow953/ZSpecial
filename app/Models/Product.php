@@ -21,6 +21,11 @@ class Product extends Model
         return $this->hasMany(Order::class);
     }
 
+    public function secondary_images()
+    {
+        return $this->hasMany(SecondaryImage::class);
+    }
+
     public function getProfit()
     {
         return round((($this->sell_price - $this->buy_price) * 100 / $this->buy_price), 2);

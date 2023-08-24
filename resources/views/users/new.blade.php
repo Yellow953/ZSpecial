@@ -27,6 +27,11 @@
                     value="{{old('phone')}}">
             </div>
             <div class="form-group">
+                <label for="address" class="col-form-label">Address</label>
+                <input class="form-control input-rounded" name="address" required type="text" placeholder="Address"
+                    value="{{old('address')}}">
+            </div>
+            <div class="form-group">
                 <label for="password" class="col-form-label">Password</label>
                 <input type="password" class="form-control input-rounded" name="password" placeholder="********"
                     required>

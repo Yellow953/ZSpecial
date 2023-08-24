@@ -33,21 +33,23 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" href="/shop">Shop</a>
                             </li>
+                            @auth
+                            <li class="nav-item">
+                                <a href="/profile" class="nav-link text-dark">
+                                    Profile
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/logout" class="nav-link text-dark">
+                                    Logout
+                                </a>
+                            </li>
+                            @endauth
                         </ul>
                         @if(auth()->user())
                         @if (auth()->user()->role == 'admin')
                         <div class="sign_btn"><a href="/app">App</a></div>
                         @else
-                        <li class="nav-item">
-                            <a href="{{ route('logout') }}" class="nav-link text-dark"
-                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                LOGOUT
-                            </a>
-                        </li>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
                         <div class="sign_btn"><a href="/cart">Cart ({{Helper::cart_count()}})</a></div>
                         @endif
                         @else

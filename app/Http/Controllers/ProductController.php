@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Log;
 use App\Models\Product;
+use App\Models\SecondaryImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -59,7 +61,11 @@ class ProductController extends Controller
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $filename = time() . '.' . $ext;
-            $file->move('uploads/products/', $filename);
+            $image = Image::make($file);
+            $image->fit(300, 300, function ($constraint) {
+                $constraint->upsize();
+            });
+            $image->save(public_path('uploads/products/' . $filename));
             $product->image = '/uploads/products/' . $filename;
         } else {
             $product->image = "/assets/images/no_img.png";
@@ -96,9 +102,14 @@ class ProductController extends Controller
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $filename = time() . '.' . $ext;
-            $file->move('uploads/products/', $filename);
+            $image = Image::make($file);
+            $image->fit(300, 300, function ($constraint) {
+                $constraint->upsize();
+            });
+            $image->save(public_path('uploads/products/' . $filename));
             $product->image = '/uploads/products/' . $filename;
         }
+
         if ($request->category_id) {
             $product->category_id = $request->category_id;
         }
@@ -149,4 +160,53 @@ class ProductController extends Controller
         $product->save();
         return redirect('/products')->with('success', 'Product was successfully imported.');
     }
+
+    public function secondary_images_index($id)
+    {
+        $product = Product::findOrFail($id);
+        $secondary_images = SecondaryImage::where('product_id', $id)->get();
+
+        $data = compact('product', 'secondary_images');
+        return view('products.secondary_images', $data);
+    }
+
+    public function secondary_images_create(Request $request)
+    {
+        $this->validate($request, [
+            'images.*' => 'image'
+        ]);
+        $product = Product::findOrFail($request->product_id);
+
+        foreach ($request->file('images') as $index => $image) {
+            $ext = $image->getClientOriginalExtension();
+            $filename = $product->name . '_' . $index . '.' . $ext;
+            $image = Image::make($image);
+            $image->fit(300, 300, function ($constraint) {
+                $constraint->upsize();
+            });
+            $image->save(public_path('uploads/products/' . $filename));
+            $path = '/uploads/products/' . $filename;
+
+            SecondaryImage::create([
+                'product_id' => $request->product_id,
+                'image' => $path,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Secondary Images uploaded successfully...');
+    }
+
+    public function secondary_images_destroy($id)
+    {
+        $secondary_image = SecondaryImage::findOrFail($id);
+
+        $path = public_path($secondary_image->image);
+        File::delete($path);
+        $secondary_image->delete();
+
+        return redirect()->back()->with('danger', 'Secondary Image deleted...');
+    }
+
 }
