@@ -67,7 +67,7 @@
                             </svg>
                             <span class="my-auto">Promos</span></a></li>
 
-                    <li><a href="/social_media" class="d-flex w-100 ">
+                    <li><a href="https://app.ayrshare.com/" target="_blank" class="d-flex w-100 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-google my-auto" viewBox="0 0 16 16">
                                 <path
