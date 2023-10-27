@@ -2,38 +2,70 @@
 
 namespace App\Helpers;
 
-use App\Models\Cart;
-use App\Models\DollarRate;
+use App\Models\Currency;
+use App\Models\Order;
+use App\Models\Product;
 use App\Models\Variable;
 
 class Helper
 {
-    public static function dollar_rate()
+    public static function is_active($currency_name)
     {
-        if (DollarRate::count() == 0) {
-            return DollarRate::create(['lbp' => 90000]);
-        } else {
-            return DollarRate::first();
+        try {
+            $currency = Currency::where('name', $currency_name)->firstOrFail();
+            return $currency->active;
+        } catch (\Throwable $th) {
+            session()->flash('error', 'No such currency in our database!');
         }
     }
 
-
-    public static function price_to_lbp($price)
+    public static function price_to_lbp($number)
     {
-        if (DollarRate::count() == 0) {
-            $dollar_rate = DollarRate::create(['lbp' => 100000]);
-        } else {
-            $dollar_rate = DollarRate::first();
+        try {
+            $currency = Currency::where('name', 'LBP')->firstOrFail();
+            return $currency->rate * $number;
+        } catch (\Throwable $th) {
+            session()->flash('error', 'No such currency in our database!');
         }
-        return $price * $dollar_rate->lbp;
+    }
+
+    public static function get_rate($curerncy_name)
+    {
+        try {
+            $currency = Currency::select('rate')->where('name', $curerncy_name)->firstOrFail();
+            return $currency->rate;
+        } catch (\Throwable $th) {
+            session()->flash('error', 'No such currency in our database!');
+        }
     }
 
     public static function cart_count()
     {
-        if (auth()->user()) {
-            return Cart::where('user_id', auth()->user()->id)->count();
-        } else {
+        try {
+            $cartItems = json_decode($_COOKIE['cart'], true) ?? [];
+            return count($cartItems);
+        } catch (\Throwable $th) {
             return 0;
+        }
+    }
+
+    public static function count_new_orders()
+    {
+        return Order::where('status', 'new')->count();
+    }
+
+    public static function get_product($id)
+    {
+        return Product::find($id);
+    }
+
+    public static function isInCart($productId)
+    {
+        if (isset($_COOKIE['cart'])) {
+            $cartItems = json_decode($_COOKIE['cart'], true) ?? [];
+            return isset($cartItems[$productId]);
+        } else {
+            return false;
         }
     }
 
@@ -47,5 +79,4 @@ class Helper
             return "Bundles";
         }
     }
-
 }

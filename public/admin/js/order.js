@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  //add product btn
+  // Add product btn
   $(".add-product-btn").on("click", function (e) {
     e.preventDefault();
     var name = $(this).data("name");
@@ -8,101 +8,76 @@ $(document).ready(function () {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
-
+    
     $(this).removeClass("btn-success").addClass("btn-default disabled");
 
-    var html = `<tr>
-                <td>${name}</td>
-                <td><input type="number" name="products[${id}][quantity]" data-price="${price}" class="form-control input-sm product-quantity" min="1" value="1"></td>
-                <td class="product-price">${price}</td>               
-                <td><button class="btn btn-danger btn-sm remove-product-btn" data-id="${id}"><span class="fa fa-trash"></span></button></td>
-            </tr>`;
+    var html = `
+      <tr>
+        <td>${name}</td>
+        <td>
+          <input type="number" name="products[${id}][quantity]" data-price="${price}" class="form-control" min="1" value="1">
+        </td>
+        <td class="product-price">${price}</td>
+        <td>
+          <button class="btn btn-danger btn-sm remove-product-btn" data-id="${id}">
+            <span class="fa fa-trash"></span>
+          </button>
+        </td>
+      </tr>`;
 
     $(".order-list").append(html);
 
-    //to calculate total price
+    // Calculate total price
     calculateTotal();
   });
 
-  //disabled btn
-  $("body").on("click", ".disabled", function (e) {
-    e.preventDefault();
-  }); //end of disabled
-
-  //remove product btn
+  // Remove product btn
   $("body").on("click", ".remove-product-btn", function (e) {
     e.preventDefault();
     var id = $(this).data("id");
-
     $(this).closest("tr").remove();
-    $("#product-" + id)
-      .removeClass("btn-default disabled")
-      .addClass("btn-success");
-
-    //to calculate total price
+    $("#product-" + id).removeClass("btn-default disabled").addClass("btn-success");
     calculateTotal();
-  }); //end of remove product btn
+  });
 
-  //change product quantity
-  $("body").on("keyup change", ".product-quantity", function () {
-    var quantity = Number($(this).val()); //2
-    var unitPrice = parseFloat($(this).data("price").replace(/,/g, ""));
-    $(this)
-      .closest("tr")
-      .find(".product-price")
-      .html(
-        (quantity * unitPrice).toLocaleString(undefined, {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })
-      );
+  // Update the total price based on quantity
+  $("body").on("keyup change", ".form-control[name$='[quantity]']", function () {
+    updateProductPrice($(this));
     calculateTotal();
-  }); //end of product quantity change
+  });
+});
 
-  //list all order products
-  $(".order-products").on("click", function (e) {
-    e.preventDefault();
+function updateProductPrice(input) {
+  var unitPrice;
+  
+  unitPrice = parseFloat(input.closest("tr").find("[name$='[quantity]']").data('price')) || 0;
 
-    $("#loading").css("display", "flex");
+  var quantity = Number(input.closest("tr").find("[name$='[quantity]']").val()) || 0;
+  
+  var totalPrice = (quantity * unitPrice ).toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
-    var url = $(this).data("url");
-    var method = $(this).data("method");
-    $.ajax({
-      url: url,
-      method: method,
-      success: function (data) {
-        $("#loading").css("display", "none");
-        $("#order-product-list").empty();
-        $("#order-product-list").append(data);
-      },
-    });
-  }); //end of order products click
-}); //end of document ready
+  input.closest("tr").find(".product-price").html(totalPrice);
+}
 
-//calculate the total
 function calculateTotal() {
-  var price = 0;
+  var total = 0;
 
-  $(".order-list .product-price").each(function (index) {
-    price += parseFloat($(this).html().replace(/,/g, ""));
-  }); //end of product price
+  $(".order-list .product-price").each(function () {
+    var priceString = $(this).html().replace(/,/g, ""); // Remove commas
+    var price = parseFloat(priceString);
+    total += price;
+  });
 
-  $(".total-price").html(
-    price.toLocaleString(undefined, {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    })
-  );
+  // Update the total price input field without formatting
+  $(".total-price").val(total.toFixed(2)); // Format to 2 decimal places
 
-  var dollar_rate = parseInt(
-    document.getElementById("dollar_rate").innerHTML.replace(/,/g, "")
-  );
-  $(".total-price-lbp").html((price * dollar_rate).toLocaleString(undefined));
-
-  //check if price > 0
-  if (price > 0) {
-    $("#add-order-form-btn").removeClass("disabled");
+  // Check if total > 0
+  if (total > 0) {
+    $("#form-btn").removeClass("disabled");
   } else {
-    $("#add-order-form-btn").addClass("disabled");
-  } //end of else
-} //end of calculate total
+    $("#form-btn").addClass("disabled");
+  }
+}

@@ -15,16 +15,16 @@
             <div class="input-group input-group-outline">
                 <form action="/logs" method="get">
                     <div class="input-group input-group-outline">
-                        <label for="filter_start" class="mx-1 my-3">From:</label>
-                        <input type="date" class="form-control mx-1 rounded" name="filter_start"
-                            value="{{request()->query('filter_start')}}" placeholder="From...">
-                        <label for="filter_end" class="mx-1 my-3">To:</label>
-                        <input type="date" class="form-control mx-1 rounded" name="filter_end"
-                            value="{{request()->query('filter_end')}}" placeholder="To...">
-                        <input type="text" class="form-control mx-1 rounded" name="search"
+                        <label for="start_date" class="m-1 py-2">From:</label>
+                        <input type="date" class="form-control mx-1" name="start_date"
+                            value="{{request()->query('start_date')}}" placeholder="From...">
+                        <label for="end_date" class="m-1 py-2">To:</label>
+                        <input type="date" class="form-control mx-1" name="end_date"
+                            value="{{request()->query('end_date')}}" placeholder="To...">
+                        <input type="text" class="form-control mx-1" name="search"
                             value="{{request()->query('search')}}" placeholder="Type here...">
-                        <button type="submit" class="btn btn-primary m-1 btn-rounded">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                        <button type="submit" class="btn btn-info btn-custom text-dark m-1 py-1 px-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-search mr-1" viewBox="0 0 16 16">
                                 <path
                                     d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />

@@ -1,38 +1,44 @@
 @extends('admin.app')
 
 @section('content')
-<a href="/variables" class="btn text-secondary">
-    <h3>
-        < back</h3>
-</a>
+<div class="container">
+    <a href="/variables" class="btn text-secondary">
+        <h3>
+            < back</h3>
+    </a>
 
-<div class="card m-3">
-    <div class="card-body">
-        <h4 class="header-title">New Variable</h4>
-        <form method="POST" action="/variable/create" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group">
-                <label for="title" class="col-form-label">Title *</label>
-                <input class="form-control input-rounded" name="title" required type="text" placeholder="Title"
-                    value="{{old('title')}}">
+    <div class="row mt-3">
+        <div class="offset-md-2 col-md-8">
+            <div class="card border">
+                <div class="card-header bg-info">
+                    <h2 class="font-weight-bolder text-center my-4">New Variable</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/variables/create" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="title" class="col-form-label">Title *</label>
+                            <input class="form-control" name="title" required type="text" placeholder="Title"
+                                value="{{old('title')}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="value" class="col-form-label">Value *</label>
+                            <input class="form-control" name="value" required type="text" placeholder="Value"
+                                value="{{old('value')}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="type" class="col-form-label">Type*</label>
+                            <select class="custom-select" name="type" required>
+                                <option value="Bundle Title" selected>Bundle Title</option>
+                            </select>
+                        </div>
+                        <div class="w-100 mt-5">
+                            <button type="submit" class="btn btn-info w-100">Create</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="value" class="col-form-label">Value *</label>
-                <input class="form-control input-rounded" name="value" required type="text" placeholder="Value"
-                    value="{{old('value')}}">
-            </div>
-            <div class="form-group">
-                <label for="type" class="col-form-label">Type*</label>
-                <select class="form-control input-rounded" name="type" required>
-                    <option value="Bundle Title" selected>Bundle Title</option>
-                </select>
-            </div>
-            <div class="w-100 d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary btn-rounded">Create</button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
-
 @endsection

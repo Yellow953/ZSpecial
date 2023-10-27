@@ -2,85 +2,95 @@
 
 @section('content')
 
-<a href="/orders" class="btn text-secondary">
+<a href="/orders" class="btn text-secondary m-3">
     <h3>
         < Back</h3>
 </a>
 
-<!-- page title area end -->
-<div class="main-content-inner m-3">
-    <div class="row">
-        <div class="col-lg-12 mt-5">
-            <div class="card">
-                <div class="card-body">
-                    <div class="invoice-area">
-                        <div class="invoice-head">
-                            <div class="row">
-                                <div class="iv-left col-6">
-                                    <span>ORDER</span>
-                                </div>
-                                <div class="iv-right col-6 text-md-right">
-                                    <span>#{{$order->id}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="invoice-table table-responsive mt-5">
-                            <table class="table table-bordered table-hover text-right">
-                                <thead>
-                                    <tr class="text-capitalize">
-                                        <th class="text-left" style="width: 45%; min-width: 130px;">Product</th>
-                                        <th>Quantity</th>
-                                        <th style="min-width: 100px">Unit Cost</th>
-                                        <th>total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($order->products as $product)
-                                    <tr>
-                                        <td class="text-left">{{ucfirst($product->name)}}</td>
-                                        <td>{{number_format($product->pivot->quantity)}}</td>
-                                        <td>
-                                            @if (Helper::dollar_rate()->usage == true )
-                                            {{number_format(Helper::price_to_lbp($product->sell_price))}} LBP
-                                            @else
-                                            {{number_format($product->sell_price, 2)}} $
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if (Helper::dollar_rate()->usage == true )
-                                            {{number_format(Helper::price_to_lbp($product->sell_price *
-                                            $product->pivot->quantity))}} LBP
-                                            @else
-                                            {{number_format($product->sell_price * $product->pivot->quantity, 2)}} $
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="3">total balance :</td>
-                                        <td>
-                                            @if (Helper::dollar_rate()->usage == true )
-                                            {{number_format(Helper::price_to_lbp($order->total_price))}} LBP
-                                            @else
-                                            {{number_format($order->total_price, 2)}} $
-                                            @endif
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+<div class="container">
+    <div class="card border">
+        <div class="card-header">
+            Order: {{ $order->id }} <br />
+            <strong>Date: {{ $order->created_at->format('d/m/Y') }}</strong>
+            <span class="float-right"> <strong>Status:</strong> {{ ucwords($order->status) }}</span>
+
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-sm-6">
+                    <h6 class="mb-3">From:</h6>
+                    <div>
+                        <strong>ZSpecial</strong>
                     </div>
+                    <div>Lebanon, Beirut</div>
+                    <div>Email: z.special2022@gmail.com</div>
+                    <div>Phone: +961 81 495 312</div>
+                </div>
+
+                <div class="col-sm-6">
+                    <h6 class="mb-3">To:</h6>
+                    <div>
+                        <strong>{{ ucwords($order->user->name) }}</strong>
+                    </div>
+                    <div>{{ $order->user->address }}</div>
+                    <div>Email: {{ $order->user->email }}</div>
+                    <div>Phone: {{ $order->user->phone }}</div>
                 </div>
             </div>
+
+            <div class="table-responsive-sm">
+                <table class="table table-striped">
+                    <thead class="bg-dark text-white">
+                        <tr>
+                            <th>#</th>
+                            <th>Item</th>
+                            <th>Unit Cost</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($order->products as $index => $product)
+                        <tr>
+                            <td class="center">{{ $index }}</td>
+                            <td class="left strong">{{ ucwords($product->name) }}</td>
+                            <td class="right">${{ number_format($product->sell_price, 2) }}</td>
+                            <td class="center">{{ $product->pivot->quantity }}</td>
+                            <td class="right">${{ number_format($product->sell_price * $product->pivot->quantity, 2) }}
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-5 ml-auto">
+                    <table class="table table-clear">
+                        <tbody>
+                            <tr>
+                                <td class="left">
+                                    <strong>Subtotal</strong>
+                                </td>
+                                <td class="right">${{ number_format($sub_total, 2) }}</td>
+                            </tr>
+                            <tr>
+                                <td class="left">
+                                    <strong>Total</strong>
+                                </td>
+                                <td class="right">
+                                    <strong>${{ number_format($order->total_price)
+                                        }}</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
         </div>
     </div>
 </div>
 
-{{-- <script>
-    $(document).ready(function () {
-        window.print();
-    });
-</script> --}}
 @endsection

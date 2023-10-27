@@ -32,26 +32,25 @@ class VariableController extends Controller
             'type' => 'required',
         ]);
 
-        $variable = new Variable();
-        $variable->title = $request->title;
-        $variable->type = $request->type;
-        $variable->value = $request->value;
+        Variable::create([
+            'title' => $request->title,
+            'type' => $request->type,
+            'value' => $request->value,
+        ]);
+
 
         $text = "Variable " . $request->title . " created, datetime: " . now();
         Log::create(['text' => $text]);
 
-        $variable->save();
         return redirect('/variables')->with('success', 'Variable was successfully created.');
     }
 
-    public function edit($id)
+    public function edit(Variable $variable)
     {
-        $variable = Variable::findOrFail($id);
-        $data = compact('variable');
-        return view('variables.edit', $data);
+        return view('variables.edit', compact('variable'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Variable $variable, Request $request)
     {
         $request->validate([
             'title' => 'required',
@@ -59,37 +58,25 @@ class VariableController extends Controller
             'type' => 'required',
         ]);
 
-        $variable = Variable::findOrFail($id);
-        $variable->title = $request->title;
-        $variable->type = $request->type;
-        $variable->value = $request->value;
-
-        // if ($request->hasFile('image')) {
-        //     $file = $request->file('image');
-        //     $ext = $file->getClientOriginalExtension();
-        //     $filename = time() . '.' . $ext;
-        //     $file->move('uploads/variables/', $filename);
-        //     $variable->image = '/uploads/variables/' . $filename;
-        // }
+        $variable->update([
+            'title' => $request->title,
+            'type' => $request->type,
+            'value' => $request->value,
+        ]);
 
         $text = "Variable " . $variable->title . " updated, datetime: " . now();
-        $variable->save();
         Log::create(['text' => $text]);
+
         return redirect('/variables')->with('success', 'Variable was successfully updated.');
     }
 
-    public function destroy($id)
+    public function destroy(Variable $variable)
     {
-        $variable = Variable::findOrFail($id);
         $text = "Variable " . $variable->name . " deleted, datetime: " . now();
-
-        // if ($variable->image != '/assets/images/no_img.png') {
-        //     $path = public_path($variable->image);
-        //     File::delete($path);
-        // }
+        Log::create(['text' => $text]);
 
         $variable->delete();
-        Log::create(['text' => $text]);
+
         return redirect('/variables')->with('danger', 'Variable was successfully deleted');
     }
 }

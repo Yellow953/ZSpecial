@@ -10,12 +10,12 @@ class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['admin', 'verified']);
+        $this->middleware('admin');
     }
 
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::select('id', 'name', 'description', 'active')->get();
         return view('categories.index', compact('categories'));
     }
 
@@ -27,49 +27,63 @@ class CategoryController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => ['required', 'max:255'],
         ]);
-        $category = new Category();
-        $category->name = $request->name;
-        if ($request->description) {
-            $category->description = $request->description;
-        }
+
+        $category = Category::create([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
 
         $text = "Category " . $request->name . " created, datetime: " . now();
 
-        $category->save();
         Log::create(['text' => $text]);
+
         return redirect('/categories')->with('success', 'Category was successfully created.');
     }
 
-    public function edit($id)
+    public function edit(Category $category)
     {
-        $category = Category::findOrFail($id);
         return view('categories.edit', compact('category'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Category $category, Request $request)
     {
-        $category = Category::findOrFail($id);
-        $category->name = $request->name;
-        if ($request->description) {
-            $category->description = $request->description;
-        }
+        $request->validate([
+            'name' => ['required', 'max:255'],
+        ]);
+
+        $category->update([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
 
         $text = "Category " . $category->name . " updated, datetime: " . now();
 
-        $category->save();
         Log::create(['text' => $text]);
+
         return redirect('/categories')->with('success', 'Category was successfully updated.');
     }
 
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        $category = Category::findOrFail($id);
         $text = "Category " . $category->name . " deleted, datetime: " . now();
 
         $category->delete();
+
         Log::create(['text' => $text]);
+
         return redirect('/categories')->with('danger', 'Category was successfully deleted');
+    }
+
+    public function switch(Category $category)
+    {
+        if ($category->active) {
+            $category->update(['active' => false]);
+            return redirect()->back()->with('success', 'Category was successfully deactivated...');
+        } else {
+            $category->update(['active' => true]);
+            return redirect()->back()->with('success', 'Category was successfully activated...');
+        }
     }
 }

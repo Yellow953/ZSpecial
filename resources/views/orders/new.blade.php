@@ -2,6 +2,15 @@
 
 @section('content')
 
+<script src="{{asset('/admin/js/order.js')}}"></script>
+
+<style>
+    .table td,
+    th {
+        width: 100px
+    }
+</style>
+
 <div class="content-wrapper m-3">
 
     <section class="content-header mb-3 d-flex justify-content-between my-3">
@@ -19,7 +28,7 @@
 
         <div class="row">
 
-            <div class="col-md-7">
+            <div class="col-md-5">
 
                 <div class="box box-primary">
 
@@ -33,14 +42,13 @@
 
                         @foreach ($categories as $category)
 
-                        <div class="panel-group col-md-5">
+                        <div class="panel-group col-md-12">
 
                             <div class="panel panel-info">
 
                                 <div class="panel-heading">
-                                    <h5 class="panel-title">
+                                    <h5 class="panel-title mb-2 mx-3">
                                         <a data-toggle="collapse" href="#{{ str_replace(' ', '-', $category->name) }}">
-                                            <img src="{{asset($category->image)}}" alt="" class="cat-icon">
                                             {{ ucfirst($category->name)}}
                                         </a>
                                     </h5>
@@ -100,7 +108,7 @@
 
             </div><!-- end of col -->
 
-            <div class="col-md-5">
+            <div class="col-md-7">
 
                 <div class="box box-primary">
 
@@ -112,7 +120,7 @@
 
                     <div class="box-body">
 
-                        <form action="/order/create" method="post">
+                        <form action="/orders/create" method="post">
 
                             {{ csrf_field() }}
                             {{ method_field('post') }}
@@ -122,7 +130,7 @@
                                     <label for="user_id" class="mt-1">User</label>
                                 </div>
                                 <div class="col-9">
-                                    <select name="user_id" id="user_id" required class="form-control">
+                                    <select name="user_id" id="user_id" required class="form-control py-0">
                                         @foreach ($users as $user)
                                         <option value="{{$user->id}}">{{$user->name}}</option>
                                         @endforeach
@@ -140,14 +148,16 @@
                                 </thead>
 
                                 <tbody class="order-list">
-
-
                                 </tbody>
 
                             </table><!-- end of table -->
 
-                            <h4>Total : <span class="total-price">0</span> $</h4>
-                            <h4>Total in LBP : <span class="total-price-lbp">0</span> LBP</h4>
+                            <div class="d-flex mb-3">
+                                <h4 class="my-auto">Total Price :</h4>
+                                <input type="number" class="total-price form-control mx-3" value="0"
+                                    style="width: 100px" name="total_price">
+                                <span class="my-auto">$</span>
+                            </div>
 
                             <button class="btn btn-primary btn-block disabled my-3" id="add-order-form-btn"><i
                                     class="fa fa-plus"></i> Add Order</button>
@@ -165,17 +175,4 @@
     </section><!-- end of content -->
 
 </div><!-- end of content wrapper -->
-
-<script>
-    // disable enter key
-    $(document).ready(function() {
-        $(window).keydown(function(event){
-            if(event.keyCode == 13) {
-            event.preventDefault();
-            return false;
-            }
-        });
-    });
-</script>
-
 @endsection

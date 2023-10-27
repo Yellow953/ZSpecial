@@ -18,104 +18,113 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::with('products', 'user')->get();
         return view('orders.index', compact('orders'));
     }
 
     public function new()
     {
-        $categories = Category::with('products')->get();
-        $orders = Order::paginate(5);
-        $users = User::all();
+        $categories = Category::select('id', 'name')->with('products')->get();
+        $users = User::select('id', 'name')->get();
 
-        $data = compact('categories', 'orders', 'users');
+        $data = compact('categories', 'users');
         return view('orders.new', $data);
-
     } //end of new
 
     public function create(Request $request)
     {
         $request->validate([
-            'products' => 'required|array',
+            'total_price' => ['required', 'numeric', 'min:0']
         ]);
 
-        foreach ($request->products as $id => $quantity) {
-            $product = Product::FindOrFail($id);
-            if (($product->quantity - $quantity['quantity']) < 0) {
-                return redirect()->back()->with('danger', 'Product not available...');
-            }
-        }
         $this->attach_order($request);
 
-        session()->flash('success', "order created successfully");
+        session()->flash('success', "Order created successfully");
         return redirect('/orders');
-
     } //end of create
 
-    public function edit($id)
+    public function edit(Order $order)
     {
-        $order = Order::findOrFail($id);
-        $categories = Category::with('products')->get();
-        $orders = Order::paginate(5);
-        $users = User::all();
+        $categories = Category::select('id', 'name')->with('products')->get();
+        $users = User::select('id', 'name')->get();
 
-        $data = compact('categories', 'orders', 'order', 'users');
+        $data = compact('categories', 'order', 'users');
         return view('orders.edit', $data);
-
     } //end of edit
 
-    public function update(Request $request, $id)
+    public function update(Order $order, Request $request)
     {
         $request->validate([
-            'products' => 'required|array',
+            'total_price' => ['required', 'numeric', 'min:0']
         ]);
-
-        $order = Order::findOrFail($id);
 
         $this->detach_order($order);
 
-        foreach ($request->products as $id => $quantity) {
-            $product = Product::FindOrFail($id);
-            if (($product->quantity - $quantity['quantity']) < 0) {
-                return redirect()->back()->with('danger', 'Product not available...');
-            }
-        }
         $this->attach_order($request);
 
-        session()->flash('success', "order updated successfully");
+        session()->flash('success', "Order updated successfully");
         return redirect('/orders');
-
     } //end of update
 
+    public function show(Order $order)
+    {
+        $sub_total = 0;
+
+        foreach ($order->products as $product) {
+            $sub_total += ($product->pivot->quantity * $product->sell_price);
+        }
+
+        $data = compact('order', 'sub_total');
+        return view('orders.show', $data);
+    }
+
+    public function destroy(Order $order)
+    {
+        $text = $order->user->name . " deleted Order " . $order->id . ", datetime: " . now();
+        Log::create(['text' => $text]);
+
+        $order->delete();
+        return redirect('/orders')->with('success', 'Order successfully deleted!');
+    } //end of order
+
+    public function complete(Order $order)
+    {
+        $order->update([
+            'status' => 'completed'
+        ]);
+
+        return redirect()->back()->with('success', 'Order successfully completed!');
+    }
+
+    // Private 
     private function attach_order($request)
     {
         $user = User::findOrFail($request->user_id);
         $order = $user->orders()->create([]);
 
-        $order->products()->attach($request->products);
-
         $text = "Order " . $order->id . " : ";
         $total_price = 0;
 
-        foreach ($request->products as $id => $quantity) {
-            if ($quantity['quantity'] <= 0) {
-                return redirect()->back()->with('danger', 'Negative Values...');
-            }
-
+        foreach ($request->products as $id => $item) {
             $product = Product::FindOrFail($id);
-            $text .= $product->name . " : " . $quantity['quantity'] . " , ";
-            $total_price += $product->sell_price * $quantity['quantity'];
+            $text .= $product->name . " : " . $item['quantity'] . " , ";
 
-            $product->update([
-                'quantity' => $product->quantity - $quantity['quantity']
+            $total_price += $product->sell_price * $item['quantity'];
+            $order->products()->attach([
+                $id => [
+                    'quantity' => $item['quantity'],
+                ]
             ]);
 
+            $product->update([
+                'quantity' => $product->quantity - $item['quantity']
+            ]);
         } //end of foreach
 
         $order->update([
-            'total_price' => $total_price
+            'total_price' => $request->total_price
         ]);
-        $text .= " total price : " . $total_price;
+        $text .= " total price : " . $request->total_price;
 
         $text .= ", datetime: " . now();
         Log::create(['text' => $text]);
@@ -128,39 +137,8 @@ class OrderController extends Controller
             $product->update([
                 'quantity' => $product->quantity + $product->pivot->quantity
             ]);
-
         } //end of for each
 
         $order->delete();
-
     } //end of detach order
-
-    public function show($id)
-    {
-        $order = Order::findOrFail($id);
-        return view('orders.show', compact('order'));
-    }
-
-    public function destroy($id)
-    {
-        $order = Order::findOrFail($id);
-
-        $text = $order->user->name . " deleted order " . $order->id . ", datetime: " . now();
-        Log::create(['text' => $text]);
-
-        $order->delete();
-        session()->flash('success', "Order successfully deleted!");
-        return redirect('/orders');
-
-    } //end of order
-
-    public function complete($id)
-    {
-        $order = Order::findOrFail($id);
-        $order->update([
-            'status' => 'completed'
-        ]);
-        return redirect()->back()->with('success', 'Order successfully completed!');
-    }
-
 }

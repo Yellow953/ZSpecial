@@ -1,31 +1,39 @@
 @extends('admin.app')
 
 @section('content')
-<a href="/categories" class="btn text-secondary">
-    <h3>
-        < back</h3>
-</a>
+<div class="container">
+    <a href="/categories" class="btn text-secondary">
+        <h3>
+            < back</h3>
+    </a>
 
-<div class="card m-3">
-    <div class="card-body">
-        <h4 class="header-title">New Category</h4>
-        <form method="POST" action="/category/create" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group">
-                <label for="name" class="col-form-label">Name *</label>
-                <input class="form-control input-rounded" name="name" required type="text" placeholder="Category Name"
-                    value="{{old('name')}}">
-            </div>
-            <div class="form-group">
-                <label for="description" class="col-form-label">Description</label>
-                <input class="form-control input-rounded" name="description" type="text"
-                    placeholder="Category Description" value="{{old('description')}}">
-            </div>
+    <div class="row mt-3">
+        <div class="offset-md-2 col-md-8">
+            <div class="card border">
+                <div class="card-header bg-info">
+                    <h2 class="font-weight-bolder text-center my-4">New Category</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/categories/create" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="name" class="col-form-label">Name *</label>
+                            <input class="form-control" name="name" required type="text" placeholder="Category Name"
+                                value="{{old('name')}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="col-form-label">Description</label>
+                            <input class="form-control" name="description" type="text"
+                                placeholder="Category Description" value="{{old('description')}}">
+                        </div>
 
-            <div class="w-100 d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary btn-rounded">Create</button>
+                        <div class="w-100 mt-5">
+                            <button type="submit" class="btn btn-info w-100">Create</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 @endsection

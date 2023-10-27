@@ -14,11 +14,6 @@
 
     <title>{{ config('app.name', 'ZSpecial') }}</title>
 
-    <!-- site metas -->
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
     <!-- bootstrap css -->
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <!-- style css -->
@@ -43,7 +38,7 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" style="overflow-x: hidden">
         @yield('content')
     </div>
 

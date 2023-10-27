@@ -11,14 +11,14 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::SHOP;
 
     protected function authenticated(Request $request, $user)
     {
         if ($user->role == 'admin') {
-            return redirect('/app');
+            return redirect()->intended('/app');
         } else {
-            return redirect('/shop');
+            return redirect()->intended('/');
         }
     }
 

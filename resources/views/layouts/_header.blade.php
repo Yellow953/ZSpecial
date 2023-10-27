@@ -25,25 +25,31 @@
                             <div class="collapse navbar-collapse" id="navbarsExample04">
                                 <ul class="navbar-nav mr-auto">
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" href="/"> Home </a>
+                                        <a class="nav-link px-3 text-dark" href="/"> Home </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" href="/#about">About</a>
+                                        <a class="nav-link px-3 text-dark" href="/#about">About</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" href="/shop">Shop</a>
+                                        <a class="nav-link px-3 text-dark" href="/shop">Shop</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link px-3 text-dark" href="/cart">Cart
+                                            (<span id="cartCount">{{Helper::cart_count()}}</span>)</a>
                                     </li>
                                 </ul>
 
-                                @if(auth()->user())
+                                @auth
                                 @if (auth()->user()->role == 'admin')
                                 <div class="sign_btn"><a href="/app">App</a></div>
                                 @else
-                                <div class="sign_btn"><a href="/cart">Cart ({{Helper::cart_count()}})</a></div>
+                                <div class="sign_btn"><a href="/profile">Profile</a></div>
                                 @endif
-                                @else
+                                @endauth
+
+                                @guest
                                 <div class="sign_btn"><a href="/login">Sign in</a></div>
-                                @endif
+                                @endguest
                             </div>
                         </nav>
                     </div>

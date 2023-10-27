@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <body class="main-layout">
     @include('layouts._header')
 

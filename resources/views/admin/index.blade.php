@@ -12,8 +12,8 @@
             <div class="col-md-3">
                 <img src="{{asset('/assets/images/logo.png')}}" alt="" class="rounded img-responsive w-100 h-auto">
             </div>
-            <div class="col-md-9">
-                <p class="my-3">
+            <div class="col-md-9 my-auto">
+                <p>
                     Welcome to the special shop, where we curate a unique collection of items from around the world! Our
                     mission is to bring you a variety of special products that you won't find anywhere else. From
                     kitchen to bar accessories, special gadgets and tools to solve daily problems with a limited edition

@@ -19,19 +19,6 @@
 #btn-checkout {
   min-width: 100%;
 }
-
-/* stasysiia.com */
-@import url("https://fonts.googleapis.com/css2?family=Exo&display=swap");
-body {
-  background-color: #fff;
-  font-family: "Exo", sans-serif;
-  font-size: 22px;
-  margin: 0;
-  padding: 0;
-  color: #111111;
-  justify-content: center;
-  align-items: center;
-}
 a {
   color: #0e1111;
   text-decoration: none;
@@ -58,46 +45,10 @@ input:focus,
 textarea:focus {
   outline: none;
 }
-h1 {
-  font-size: 2.4em;
-  font-weight: 600;
-  letter-spacing: 0.15rem;
-  text-align: center;
-  margin: 30px 6px;
-}
-h2 {
-  color: rgb(37, 44, 54);
-  font-weight: 700;
-  font-size: 2.5em;
-}
-h3 {
-  border-bottom: solid 2px #000;
-}
-h5 {
-  padding: 0;
-  font-weight: bold;
-  color: #92afcc;
-}
 p {
   color: #333;
   font-family: "Roboto", sans-serif;
   margin: 0.6em 0;
-}
-h1,
-h2,
-h4 {
-  text-align: center;
-  padding-top: 16px;
-}
-/* yukito bloody */
-.back {
-  position: relative;
-  top: -30px;
-  font-size: 16px;
-  margin: 10px 10px 3px 15px;
-}
-.inline {
-  display: inline-block;
 }
 
 .shopnow,
@@ -115,30 +66,6 @@ h4 {
   text-decoration: none;
   color: white;
   background-color: #46a3a6;
-}
-/* for button animation*/
-.shopnow span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: all 0.5s;
-}
-.shopnow span:after {
-  content: url("https://badux.co/smc/codepen/caticon.png");
-  position: absolute;
-  font-size: 30px;
-  opacity: 0;
-  top: 2px;
-  right: -6px;
-  transition: all 0.5s;
-}
-.shopnow:hover span {
-  padding-right: 25px;
-}
-.shopnow:hover span:after {
-  opacity: 1;
-  top: 2px;
-  right: -6px;
 }
 .ma {
   margin: auto;
@@ -170,10 +97,10 @@ h4 {
 }
 
 .size-1 {
-  font-size: 20px;
+  font-size: 30px;
 }
 .size-2 {
-  font-size: 12px;
+  font-size: 20px;
 }
 
 #promo {
