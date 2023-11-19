@@ -24,7 +24,7 @@
                 <input type="password" id="password" name="password" required class="form-control border">
             </div>
             <div class="row mb-3">
-                <div class="col-md-12">
+                <div class="col-6">
                     <div class="d-flex">
                         <input class="form-check-input border" type="checkbox" name="remember" id="remember" {{
                             old('remember') ? 'checked' : '' }}>
@@ -33,6 +33,9 @@
                             {{ __('Remember Me') }}
                         </label>
                     </div>
+                </div>
+                <div class="col-6 text-right">
+                    <a href="/password/reset" >Forgot Password...</a>
                 </div>
             </div>
 

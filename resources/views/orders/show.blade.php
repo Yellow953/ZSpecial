@@ -78,7 +78,7 @@
                                     <strong>Total</strong>
                                 </td>
                                 <td class="right">
-                                    <strong>${{ number_format($order->total_price)
+                                    <strong>${{ number_format($order->total_price, 2)
                                         }}</strong>
                                 </td>
                             </tr>
