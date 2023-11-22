@@ -45,6 +45,10 @@ $(document).ready(function () {
     updateProductPrice($(this));
     calculateTotal();
   });
+
+  $(".shipping-cost").on("keyup change", function () {
+    calculateTotal();
+  });
 });
 
 function updateProductPrice(input) {
@@ -64,17 +68,18 @@ function updateProductPrice(input) {
 
 function calculateTotal() {
   var total = 0;
+  var shipping_cost = parseFloat($(".shipping-cost").val()) || 0;
 
   $(".order-list .product-price").each(function () {
-    var priceString = $(this).html().replace(/,/g, ""); // Remove commas
-    var price = parseFloat(priceString);
+    var priceString = $(this).html().replace(/,/g, "");
+    var price = parseFloat(priceString) || 0;
     total += price;
   });
 
-  // Update the total price input field without formatting
-  $(".total-price").val(total.toFixed(2)); // Format to 2 decimal places
+  total += shipping_cost;
 
-  // Check if total > 0
+  $(".total-price").val(total.toFixed(2));
+
   if (total > 0) {
     $("#form-btn").removeClass("disabled");
   } else {

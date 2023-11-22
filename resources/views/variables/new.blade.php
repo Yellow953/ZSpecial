@@ -29,7 +29,10 @@
                         <div class="form-group">
                             <label for="type" class="col-form-label">Type*</label>
                             <select class="custom-select" name="type" required>
-                                <option value="Bundle Title" selected>Bundle Title</option>
+                                <option value="bundle_title" {{ old('type')=='bundle_title' ? 'selected' : '' }}>Bundle
+                                    Title</option>
+                                <option value="shipping_cost" {{ old('type')=='shipping_type' ? 'selected' : '' }}>
+                                    Shipping Cost</option>
                             </select>
                         </div>
                         <div class="w-100 mt-5">

@@ -75,6 +75,12 @@
                             </tr>
                             <tr>
                                 <td class="left">
+                                    <strong>Shipping</strong>
+                                </td>
+                                <td class="right">${{ number_format($order->shipping, 2) }}</td>
+                            </tr>
+                            <tr>
+                                <td class="left">
                                     <strong>Total</strong>
                                 </td>
                                 <td class="right">

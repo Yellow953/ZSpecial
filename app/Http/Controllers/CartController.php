@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Mail\OrderMailer;
 use App\Models\Order;
 use App\Models\Product;
@@ -39,6 +40,7 @@ class CartController extends Controller
     public function checkout()
     {
         $sub_total = 0;
+        $shipping = Helper::get_shipping_cost();
         $total = 0;
 
         try {
@@ -54,14 +56,15 @@ class CartController extends Controller
             }
         }
 
-        $total = $sub_total;
-        $data = compact('cart_items', 'sub_total', 'total');
+        $total = $sub_total + $shipping;
+        $data = compact('cart_items', 'sub_total', 'total', 'shipping');
         return view('checkout', $data);
     }
 
     public function order(Request $request)
     {
         $discount = 0;
+        $shipping = Helper::get_shipping_cost();
         $total_price = 0;
 
         try {
@@ -99,6 +102,9 @@ class CartController extends Controller
                 'quantity' => $product->quantity - $cart_item['quantity'],
             ]);
         }
+
+        $total_price += $shipping;
+        $order->shipping = $shipping;
 
         if ($discount != 0) {
             $total_price -= ($total_price * $discount);

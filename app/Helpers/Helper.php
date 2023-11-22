@@ -71,12 +71,11 @@ class Helper
 
     public static function get_title()
     {
-        $title = Variable::where('type', 'Bundle Title')->first();
+        return Variable::where('type', 'bundle_title')->first()->value ?? 'Bundles';
+    }
 
-        if ($title != null) {
-            return $title->value;
-        } else {
-            return "Bundles";
-        }
+    public static function get_shipping_cost()
+    {
+        return (float)Variable::where('type', 'shipping_cost')->first()->value ?? 3;
     }
 }

@@ -113,12 +113,20 @@
                         <span class="my-0">Promo code</span>
                         <span id="promoValue">0</span>
                     </li>
+                    @if ($sub_total != 0)
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Shipping (USD)</span>
+                        <span>
+                            $<span id="shipping">{{ number_format($shipping, 2) }}</span>
+                        </span>
+                    </li>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total (USD)</span>
                         <span>
                             $<span id="total">{{ number_format($total, 2) }}</span>
                         </span>
                     </li>
+                    @endif
                 </ul>
                 <br>
                 <div class="d-flex">
@@ -151,7 +159,7 @@
                 success: function (response) {
                     if (response.exists) {
                         let promoValue = response.value;
-                        const subtotal = parseFloat($('#subtotal').text().replace(/\$/g, '').replace(/,/g, ''));
+                        const subtotal = parseFloat($('#total').text().replace(/\$/g, '').replace(/,/g, ''));
                         const total = calculateNewTotal(subtotal, promoValue);
 
                         $('#promo').hide();
