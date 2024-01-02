@@ -89,7 +89,8 @@
                                 Terms Of Service
                             </a>
                         </div>
-                        <p class="custom-font">© 2023 All Rights Reserved by YellowTech</p>
+                        <p class="custom-font">© 2023 All Rights Reserved by <a href="https://yellowtech.dev"
+                                target="_blank">YellowTech</a></p>
                     </div>
                 </div>
             </div>
