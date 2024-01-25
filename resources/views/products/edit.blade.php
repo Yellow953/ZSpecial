@@ -45,8 +45,8 @@
 
                         <div class="form-group">
                             <label for="description" class="col-form-label">Description</label>
-                            <input class="form-control" type="text" placeholder="Description" name="description"
-                                value="{{$product->description}}">
+                            <textarea name="description" class="form-control"
+                                rows="7">{{$product->description}}</textarea>
                         </div>
 
                         <div class="form-group">
