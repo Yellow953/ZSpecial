@@ -173,10 +173,11 @@ class ProductController extends Controller
             'images.*' => 'image'
         ]);
         $product = Product::findOrFail($request->product_id);
+        $index = 0;
 
         foreach ($request->file('images') as $image) {
             $ext = $image->getClientOriginalExtension();
-            $filename = time() . '.' . $ext;
+            $filename = time() . $index . '.' . $ext;
             $image = Image::make($image);
             $image->fit(300, 300, function ($constraint) {
                 $constraint->upsize();
@@ -185,9 +186,10 @@ class ProductController extends Controller
             $path = '/uploads/products/' . $filename;
 
             SecondaryImage::create([
-                'product_id' => $request->product_id,
+                'product_id' => $product->id,
                 'image' => $path,
             ]);
+            $index++;
         }
 
         return redirect()->back()->with('success', 'Secondary Images uploaded successfully...');
