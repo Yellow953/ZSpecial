@@ -1,7 +1,7 @@
 @extends('auth.app')
 
 @section('title')
-| Reset
+Reset
 @endsection
 
 @section('content')
@@ -20,9 +20,10 @@
 
             <div class="form-gp">
                 <label for="email" class="text-dark">Email Address *</label>
-                <input type="email" id="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus class="form-control border">
+                <input type="email" id="email" name="email" value="{{ old('email') }}" required autocomplete="email"
+                    autofocus class="form-control border">
             </div>
-            
+
             <div class="submit-btn-area">
                 <button id="form_submit" type="submit" class="bg-primary text-white">Send Password Reset Link</button>
             </div>

@@ -14,14 +14,16 @@
 
     <title>{{ config('app.name', 'ZSpecial') }}</title>
 
+    <!-- favicon -->
+    <link rel="icon" href="{{asset('assets/images/logo.png')}}" type="image/gif" />
+
     <!-- bootstrap css -->
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <!-- style css -->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <!-- Responsive-->
     <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}">
-    <!-- fevicon -->
-    <link rel="icon" href="{{asset('assets/images/fevicon.png')}}" type="image/gif" />
+
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/jquery.mCustomScrollbar.min.css')}}">
     <!-- Tweaks for older IEs-->

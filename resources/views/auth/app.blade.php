@@ -4,9 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>ZSpecial @yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="{{asset('admin/images/icon/favicon.ico')}}">
+
+    <title>ZSpecial | @yield('title')</title>
+
+    <!-- favicon -->
+    <link rel="icon" href="{{asset('assets/images/logo.png')}}" type="image/gif" />
 
     <link rel="stylesheet" href="{{asset('admin/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/css/font-awesome.min.css')}}">

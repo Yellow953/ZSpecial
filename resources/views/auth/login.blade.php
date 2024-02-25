@@ -1,7 +1,7 @@
 @extends('auth.app')
 
 @section('title')
-| Login
+Login
 @endsection
 
 @section('content')
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="col-6 text-right">
-                    <a href="/password/reset" >Forgot Password...</a>
+                    <a href="/password/reset">Forgot Password...</a>
                 </div>
             </div>
 

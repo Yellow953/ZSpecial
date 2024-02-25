@@ -25,7 +25,7 @@ class OrderController extends Controller
     public function new()
     {
         $categories = Category::select('id', 'name')->with('products')->get();
-        $users = User::select('id', 'name')->get();
+        $users = User::select('id', 'name')->where('email_verified_at', '!=', null)->get();
 
         $data = compact('categories', 'users');
         return view('orders.new', $data);
@@ -46,7 +46,7 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         $categories = Category::select('id', 'name')->with('products')->get();
-        $users = User::select('id', 'name')->get();
+        $users = User::select('id', 'name')->where('email_verified_at', '!=', null)->get();
 
         $data = compact('categories', 'order', 'users');
         return view('orders.edit', $data);

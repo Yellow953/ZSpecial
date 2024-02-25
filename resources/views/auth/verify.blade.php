@@ -1,7 +1,7 @@
 @extends('auth.app')
 
 @section('title')
-| Verify
+Verify
 @endsection
 
 @section('content')

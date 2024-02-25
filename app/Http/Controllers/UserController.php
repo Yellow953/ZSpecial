@@ -16,7 +16,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::select('id', 'name', 'email', 'phone', 'created_at')->get();
+        $users = User::select('id', 'name', 'email', 'phone', 'created_at')->where('email_verified_at', '!=', null)->get();
         return view('users.index', compact('users'));
     }
 
