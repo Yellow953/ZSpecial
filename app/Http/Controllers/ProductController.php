@@ -95,9 +95,9 @@ class ProductController extends Controller
             $ext = $file->getClientOriginalExtension();
             $filename = time() . '.' . $ext;
             $image = Image::make($file);
-            $image->fit(300, 300, function ($constraint) {
-                $constraint->upsize();
-            });
+            // $image->fit(300, 300, function ($constraint) {
+            //     $constraint->upsize();
+            // });
             $image->save(public_path('uploads/products/' . $filename));
             $path = '/uploads/products/' . $filename;
         } else {
@@ -179,9 +179,9 @@ class ProductController extends Controller
             $ext = $image->getClientOriginalExtension();
             $filename = time() . $index . '.' . $ext;
             $image = Image::make($image);
-            $image->fit(300, 300, function ($constraint) {
-                $constraint->upsize();
-            });
+            // $image->fit(300, 300, function ($constraint) {
+            //     $constraint->upsize();
+            // });
             $image->save(public_path('uploads/products/' . $filename));
             $path = '/uploads/products/' . $filename;
 
