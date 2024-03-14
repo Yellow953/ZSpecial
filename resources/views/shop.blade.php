@@ -138,13 +138,15 @@
                                             <a class="carousel-control-prev"
                                                 href="#productImageCarousel{{$product->id}}" role="button"
                                                 data-slide="prev">
-                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"
+                                                    style="display: block;"></span>
                                                 <span class="sr-only">Previous</span>
                                             </a>
                                             <a class="carousel-control-next"
                                                 href="#productImageCarousel{{$product->id}}" role="button"
                                                 data-slide="next">
-                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="carousel-control-next-icon" aria-hidden="true"
+                                                    style="display: block;"></span>
                                                 <span class="sr-only">Next</span>
                                             </a>
                                         </div>
