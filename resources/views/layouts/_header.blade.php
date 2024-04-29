@@ -37,6 +37,11 @@
                                         <a class="nav-link px-3 text-dark" href="/cart">Cart
                                             (<span id="cartCount">{{Helper::cart_count()}}</span>)</a>
                                     </li>
+                                    @auth
+                                    <li class="nav-item">
+                                        <a class="nav-link px-3 text-dark" href="/logout">Logout</a>
+                                    </li>
+                                    @endauth
                                 </ul>
 
                                 @auth
